@@ -14,20 +14,22 @@ import android.widget.TextView;
 /**
  * Created by Rafi on 25/02/2016.
  */
-public class CreateTimerView extends LinearLayout implements CountDownInterface {
 
-    private LinearLayout contenedor = (LinearLayout) findViewById(R.id.contenedor);
+//Class that creates a graphical interface for a timer.
+public class TimerView extends LinearLayout{
+
+    //Take the template from "timer.xml"
     private LinearLayout timer;
-    private String sBaseTime;
+    //And the layout where it will be placed inside the main activity ("activity_main.xml")
+    private LinearLayout contenedor = (LinearLayout) findViewById(R.id.contenedor);
+    /*private String sBaseTime;
     ImageButton playButton;
     ImageButton resetButton;
     ImageButton eraseButton;
-    TextView numberView;
-//    private int seconds,minutes;
-    public CountDownTimer countDownTimer;
+    TextView numberView;*/
 
 
-    public CreateTimerView(final Context context, String sTime){
+    public TimerView(final Context context, String sTime){
 
         super(context);
         LayoutInflater inflater = LayoutInflater.from(context);

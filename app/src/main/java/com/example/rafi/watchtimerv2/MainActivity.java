@@ -168,7 +168,7 @@ public class MainActivity extends Activity/* implements View.OnClickListener*/ {
         super.onPause();
     }
 
-    
+
 
     /*public void newTimerView(String time){
 
