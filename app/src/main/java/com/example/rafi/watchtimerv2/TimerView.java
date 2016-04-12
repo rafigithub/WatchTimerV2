@@ -24,6 +24,7 @@ public class TimerView extends LinearLayout{
     private LinearLayout timer;
     //Create a Linear Layout that will contain the timer's parent.
     private LinearLayout parent;
+    private TextView time;
 
     /*ImageButton playButton;
     ImageButton resetButton;
@@ -40,16 +41,22 @@ public class TimerView extends LinearLayout{
         this.timer = (LinearLayout) inflater.inflate(R.layout.timer,parent,true);
         this.parent = parent;
         //Then set the timer to the initial time
-        TextView initialTime = (TextView) timer.findViewById(R.id.numberView);
-        initialTime.setText(sTime);
+        this.time = (TextView) timer.findViewById(R.id.numberView);
+        time.setText(sTime);
     }
-}
+
 
     public void removeTimer(){
 
-
+        parent.removeView(timer);
     }
 
+    public void updateTimer(String sTime){
+
+        time.setText(sTime);
+    }
+
+}
 /*
     playButton.setOnClickListener(new OnClickListener() {
         @Override
