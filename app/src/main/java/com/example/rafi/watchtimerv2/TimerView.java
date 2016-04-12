@@ -38,7 +38,8 @@ public class TimerView extends LinearLayout{
         super(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         //Inflate the template into the timer layout and attach it to parent
-        this.timer = (LinearLayout) inflater.inflate(R.layout.timer,parent,true);
+        this.timer = (LinearLayout) inflater.inflate(R.layout.timer,parent,false);
+        parent.addView(timer);//Done in two steps because otherwise the inflater.inflate returns the parent view instead of child.
         this.parent = parent;
         //Then set the timer to the initial time
         this.time = (TextView) timer.findViewById(R.id.numberView);
