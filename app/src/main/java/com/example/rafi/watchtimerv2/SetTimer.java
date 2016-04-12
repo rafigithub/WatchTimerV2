@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
 /**
@@ -17,6 +18,7 @@ public class SetTimer extends DialogFragment {
     private int secondPicker=0;
     private int minutePicker=0;
     private String message;
+    private LinearLayout parent;
 
     private void setSecondPicker(int secondPicker){
         this.secondPicker=secondPicker;
@@ -49,9 +51,8 @@ public class SetTimer extends DialogFragment {
             @Override
             public void onSwipeLeft() {
                 setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
-                ViewGroup contenedor= (ViewGroup) getActivity().findViewById(R.id.contenedor);
-                CreateTimerView timerView= new CreateTimerView(getActivity(),message);
-                timerView.attachTimerToView(contenedor);
+                parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
+                TimerView timerView= new TimerView(getActivity(),message, parent);
                 /*if (getSecondPicker() < 10) {
                     setMessage(getString(R.string.timeUnderTen, getMinutePicker(), getSecondPicker()));
                     ViewGroup contenedor= (ViewGroup) getActivity().findViewById(R.id.contenedor);

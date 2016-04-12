@@ -98,7 +98,7 @@ public class MainActivity extends Activity/* implements View.OnClickListener*/ {
 
     }
 
-    @Override
+ /*   @Override
     protected void onRestart(){
         super.onRestart();
         returningFromHidden=true;
@@ -157,16 +157,18 @@ public class MainActivity extends Activity/* implements View.OnClickListener*/ {
                 parent.addView(timerFrame);
             }
         }
-    }
+    }*/
 
 
 
 
+/*
     @Override
     public void onPause()
     {
         super.onPause();
     }
+*/
 
 
 
