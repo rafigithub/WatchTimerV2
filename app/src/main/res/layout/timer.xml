@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:tag="nuevo"
+    android:id="@+id/padre"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <LinearLayout
+        android:tag="nuevo"
+        android:id="@+id/hijo"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@android:color/black"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp">
+
+        <TextView
+            android:id="@+id/originalTime"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:tag="originalNumber"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#3F51B5"
+            android:src="@drawable/ic_media_play"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:id="@+id/play"
+            android:tag="play">
+        </ImageButton>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#3F51B5"
+            android:src="@android:drawable/ic_menu_revert"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:id="@+id/reset"
+            android:tag="reset"/>
+
+        <TextView
+            android:id="@+id/numberView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:text="@string/prueba"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="#3F51B5"
+            android:layout_weight="2"
+            android:tag="numberView"/>
+
+        <ImageButton
+            android:id="@+id/borrarTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#3F51B5"
+            android:src="@android:drawable/ic_menu_delete"
+            android:contentDescription="@null"
+            android:clickable="true"
+            android:tag="borrar"/>
+
+    </LinearLayout>
+
+</LinearLayout>

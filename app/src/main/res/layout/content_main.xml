@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogpadre"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#303F9F">
+
+    <RelativeLayout
+        android:id="@+id/dialoghijo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <NumberPicker
+            android:id="@+id/minute_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:solidColor="#303F9F">
+        </NumberPicker>
+
+        <NumberPicker
+            android:id="@+id/second_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/minute_picker"
+            android:solidColor="#303F9F">
+        </NumberPicker>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+    <!--android:solidColor="#3F51B5"-->
