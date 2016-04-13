@@ -23,7 +23,7 @@ public class Timer {
             public void onTick(long millisUntilFinished) {
 
                 long[] numericCurrentTime = MilliConversions.milliToMinSec(millisUntilFinished);
-                String currentTime = numericCurrentTime[0] + ":" + numericCurrentTime[1];
+                String currentTime = String.format("%02d:%02d",numericCurrentTime[0],numericCurrentTime[1]);
                 timerView.updateTimer(currentTime);
             }
 
