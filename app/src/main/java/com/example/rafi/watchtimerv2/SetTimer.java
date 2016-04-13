@@ -46,30 +46,22 @@ public class SetTimer extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //Inflate the dialog in front of the main activity
         View vista = inflater.inflate(R.layout.content_main,container, false);
+        //Set a listener and handler for right and left swipes.
         vista.setOnTouchListener(new OnSwipeTouchListener(getActivity().getApplicationContext()) {
             @Override
             public void onSwipeLeft() {
                 setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
                 parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
-                TimerView timerView= new TimerView(getActivity(),message, parent);
-                /*if (getSecondPicker() < 10) {
-                    setMessage(getString(R.string.timeUnderTen, getMinutePicker(), getSecondPicker()));
-                    ViewGroup contenedor= (ViewGroup) getActivity().findViewById(R.id.contenedor);
-                    CreateTimerView timerView= new CreateTimerView(getActivity(),message);
-                    timerView.attachTimerToView(contenedor);
-                } else {
-                    setMessage(getString(R.string.timeOverTen, getMinutePicker(), getSecondPicker()));
-                    ViewGroup contenedor= (ViewGroup) getActivity().findViewById(R.id.contenedor);
-                    CreateTimerView timerView= new CreateTimerView(getActivity(),message);
-                    timerView.attachTimerToView(contenedor);
-                }*/
+                TimerView timerView = new TimerView(getActivity(),message, parent);
                 dismiss();
             }
             public void onSwipeRight() {
                 dismiss();
             }
         });
+        //Create and initialize the number pickers and their listeners and handlers.
         NumberPicker mMinutePicker = (NumberPicker) vista.findViewById(R.id.minute_picker);
         NumberPicker mSecondPicker = (NumberPicker) vista.findViewById(R.id.second_picker);
         numberPickerSetup(mMinutePicker,99,0,true);
@@ -91,6 +83,7 @@ public class SetTimer extends DialogFragment {
     return vista;
     }
 
+    //Overloaded functions to set up number pickers.
     private void numberPickerSetup(NumberPicker numberPicker, int maxValue, int minValue, int setValue, boolean wrapWheel){
 
         numberPicker.setMinValue(minValue);
