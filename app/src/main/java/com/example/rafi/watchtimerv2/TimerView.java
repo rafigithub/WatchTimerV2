@@ -49,6 +49,21 @@ public class TimerView extends LinearLayout{
     }
 
 
+    public ImageButton getPlayButton(){
+
+        return playButton;
+    }
+    public ImageButton getResetButton(){
+
+        return resetButton;
+    }
+    public ImageButton getEraseButton(){
+
+        return eraseButton;
+    }
+
+
+
     public void removeTimerView(){
 
         parent.removeView(timer);

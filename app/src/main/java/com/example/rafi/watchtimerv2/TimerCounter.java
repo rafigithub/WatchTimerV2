@@ -7,24 +7,23 @@ import android.os.CountDownTimer;
  */
 public class TimerCounter {
 
-    CountDownTimer timer;
-    private TimerView timerView;
+    private CountDownTimer timer;
+    private String currentTime;
 
-    public TimerCounter(final TimerView timerView, String startingTime, long tick){
+    public TimerCounter(String startingTime, long tick){
 
+        currentTime = startingTime;
         String[] startingTimeSplit = startingTime.split(":");
         long minutes = Integer.parseInt(startingTimeSplit[0]);
         long seconds = Integer.parseInt(startingTimeSplit[1]);
         long numericStartingTime = MilliConversions.minSecToMilli(minutes, seconds);
 
-        this.timerView = timerView;
         this.timer = new CountDownTimer(numericStartingTime, tick) {
             @Override
             public void onTick(long millisUntilFinished) {
 
                 long[] numericCurrentTime = MilliConversions.milliToMinSec(millisUntilFinished);
-                String currentTime = String.format("%02d:%02d",numericCurrentTime[0],numericCurrentTime[1]);
-                timerView.updateTimer(currentTime);
+                currentTime = String.format("%02d:%02d",numericCurrentTime[0],numericCurrentTime[1]);
             }
 
             @Override
@@ -33,6 +32,11 @@ public class TimerCounter {
 
             }
         };
+    }
+
+    public String getCurrentTime(){
+
+        return currentTime;
     }
 
     public void startTimer(){
