@@ -47,6 +47,43 @@ public class TimerView extends LinearLayout{
         this.playButton = (ImageButton) findViewById(R.id.play);
         this.eraseButton = (ImageButton) findViewById(R.id.eraseButton);
         this.resetButton = (ImageButton) findViewById(R.id.resetButton);
+
+        //Set the listener and event handler for pressing the play button
+        playButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ImageButton play = (ImageButton) v;
+
+                if(play.getTag().equals("play")){
+                    /*countDownTimerSetup(timeInMillis, 100,context,numberView);
+                    countDownTimer.start();*/
+                    play.setImageResource(R.drawable.ic_media_pause);
+                    play.setTag("pause");
+                }
+
+                else if(play.getTag().equals("pause")){
+                    /*countDownTimer.cancel();*/
+                    play.setImageResource(R.drawable.ic_media_play);
+                    play.setTag("play");
+                }
+            }
+        });
+
+
+        eraseButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                removeTimer();
+            }
+        });
+
+
+
+
+
+
     }
 
 
@@ -62,47 +99,10 @@ public class TimerView extends LinearLayout{
 
 
 
-    playButton.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
 
-            ImageButton play=(ImageButton) v;
 
-            if(play.getTag().equals("play")){
-                countDownTimerSetup(timeInMillis, 100,context,numberView);
-                countDownTimer.start();
-                play.setImageResource(R.drawable.ic_media_pause);
-                play.setTag("pause");
-            }
 
-            else if(play.getTag().equals("pause")){
-                countDownTimer.cancel();
-                play.setImageResource(R.drawable.ic_media_play);
-                play.setTag("play");
-            }
-        }
-    });
-
-    eraseButton.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            ImageButton erase=(ImageButton) v;
-
-            try {
-                countDownTimer.cancel();
-            }
-            catch (Exception e){
-                System.out.println("El relajo era porque no existe el timer");
-            }
-            ViewGroup parent = (ViewGroup) findViewById(R.id.contenedor);
-            ViewGroup toRemove = (ViewGroup) erase.getParent().getParent();
-            parent.removeView(toRemove);
-
-        }
-    });
-
-    resetButton.setOnClickListener(new OnClickListener() {
+   /* resetButton.setOnClickListener(new OnClickListener() {
         @Override
         public void onClick(View v) {
 
@@ -110,7 +110,7 @@ public class TimerView extends LinearLayout{
 
 
         }
-    });
+    });*/
 
 
 
