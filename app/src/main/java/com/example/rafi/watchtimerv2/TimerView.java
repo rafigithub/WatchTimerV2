@@ -44,9 +44,9 @@ public class TimerView extends LinearLayout{
         this.time = (TextView) timer.findViewById(R.id.numberView);
         time.setText(sTime);
         //And set the buttons to this object button variables
-        this.playButton = (ImageButton) findViewById(R.id.play);
-        this.eraseButton = (ImageButton) findViewById(R.id.eraseButton);
-        this.resetButton = (ImageButton) findViewById(R.id.resetButton);
+        this.playButton = (ImageButton) timer.findViewById(R.id.playButton);
+        this.eraseButton = (ImageButton) timer.findViewById(R.id.eraseButton);
+        this.resetButton = (ImageButton) timer.findViewById(R.id.resetButton);
 
         //Set the listener and event handler for pressing the play button
         playButton.setOnClickListener(new OnClickListener() {
