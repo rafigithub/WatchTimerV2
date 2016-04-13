@@ -1,6 +1,7 @@
 package com.example.rafi.watchtimerv2;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
@@ -24,26 +25,30 @@ public class TimerView extends LinearLayout{
     private LinearLayout timer;
     //Create a Linear Layout that will contain the timer's parent.
     private LinearLayout parent;
+    //And variables to store the timers' buttons and displays.
+    private ImageButton playButton;
+    private ImageButton resetButton;
+    private ImageButton eraseButton;
     private TextView time;
-    //And variables to store the timers' buttons.
-    ImageButton playButton;
-    ImageButton resetButton;
-    ImageButton eraseButton;
+    //Finally, a variable to store the starting time for the timer.
+    private String startingTime;
 
     //The constructor takes an initial time and a parent to attach the timer to.
-    public TimerView(final Context context, String sTime, LinearLayout parent){
+    public TimerView(final Context context, String startingTime, LinearLayout parent){
 
         //Get the context
         super(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         //Inflate the template into the timer layout and attach it to parent
         this.timer = (LinearLayout) inflater.inflate(R.layout.timer,parent,false);
-        parent.addView(timer);//Done in two steps because otherwise the inflater.inflate returns the parent view instead of child.
+        parent.addView(timer);
         this.parent = parent;
         //Then set the timer to the initial time
         this.time = (TextView) timer.findViewById(R.id.numberView);
-        time.setText(sTime);
-        //And set the buttons to this object button variables
+        time.setText(startingTime);
+        //And set the starting time variable as well
+        this.startingTime = startingTime;
+        //Set the buttons of the template to this object button variables
         this.playButton = (ImageButton) timer.findViewById(R.id.playButton);
         this.eraseButton = (ImageButton) timer.findViewById(R.id.eraseButton);
         this.resetButton = (ImageButton) timer.findViewById(R.id.resetButton);
@@ -70,6 +75,14 @@ public class TimerView extends LinearLayout{
             }
         });
 
+         resetButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                resetTimer();
+            }
+        });
+
 
         eraseButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -78,12 +91,6 @@ public class TimerView extends LinearLayout{
                 removeTimer();
             }
         });
-
-
-
-
-
-
     }
 
 
@@ -92,28 +99,14 @@ public class TimerView extends LinearLayout{
         parent.removeView(timer);
     }
 
-    public void updateTimer(String sTime){
+    public void updateTimer(String currentTime){
 
-        time.setText(sTime);
+        time.setText(currentTime);
     }
 
+    public void resetTimer() {
 
-
-
-
-
-   /* resetButton.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            ImageButton reset=(ImageButton) v;
-
-
-        }
-    });*/
-
-
-
-
+        time.setText(startingTime);
+    }
 }
 
