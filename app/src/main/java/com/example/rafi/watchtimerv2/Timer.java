@@ -37,7 +37,12 @@ public class Timer {
 
     public void startTimer(){
 
-        timerView.startTimer(this);
+        timer.start();
+    }
+
+    public void cancelTimer(){
+
+        timer.cancel();
     }
 
 }

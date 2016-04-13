@@ -24,6 +24,8 @@ public class TimerView extends LinearLayout{
     private ImageButton resetButton;
     private ImageButton eraseButton;
     private TextView time;
+    //Create a variable to store the timer for this timerview
+    private Timer countdownTimer;
     //Finally, a variable to store the starting time for the timer.
     private String startingTime;
 
@@ -55,14 +57,15 @@ public class TimerView extends LinearLayout{
                 ImageButton play = (ImageButton) v;
 
                 if(play.getTag().equals("play")){
-                    /*countDownTimerSetup(timeInMillis, 100,context,numberView);
-                    countDownTimer.start();*/
+
+                    startTimer();
                     play.setImageResource(R.drawable.ic_media_pause);
                     play.setTag("pause");
                 }
 
                 else if(play.getTag().equals("pause")){
-                    /*countDownTimer.cancel();*/
+
+                    pauseTimer();
                     play.setImageResource(R.drawable.ic_media_play);
                     play.setTag("play");
                 }
@@ -87,10 +90,15 @@ public class TimerView extends LinearLayout{
         });
     }
 
+    public void setTimer(Timer timer){
+
+        this.countdownTimer = timer;
+    }
 
     public void removeTimer(){
 
         parent.removeView(timer);
+        countdownTimer.cancelTimer();
     }
 
     public void updateTimer(String currentTime){
@@ -101,11 +109,17 @@ public class TimerView extends LinearLayout{
     public void resetTimer() {
 
         time.setText(startingTime);
+        countdownTimer.cancelTimer();
     }
 
-    public void startTimer(Timer timer){
+    public void startTimer(){
 
-        timer.startTimer();
+        countdownTimer.startTimer();
+    }
+
+    public void pauseTimer(){
+
+        countdownTimer.cancelTimer();
     }
 }
 
