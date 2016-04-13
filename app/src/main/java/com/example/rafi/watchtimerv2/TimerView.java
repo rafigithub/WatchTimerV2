@@ -24,8 +24,6 @@ public class TimerView extends LinearLayout{
     private ImageButton resetButton;
     private ImageButton eraseButton;
     private TextView time;
-    //Create a variable to store the timer for this timerview
-    private TimerCounter countdownTimer;
     //Finally, a variable to store the starting time for the timer.
     private String startingTime;
 
@@ -48,78 +46,22 @@ public class TimerView extends LinearLayout{
         this.playButton = (ImageButton) timer.findViewById(R.id.playButton);
         this.eraseButton = (ImageButton) timer.findViewById(R.id.eraseButton);
         this.resetButton = (ImageButton) timer.findViewById(R.id.resetButton);
-
-        //Set the listener and event handler for pressing the play button
-        playButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ImageButton play = (ImageButton) v;
-
-                if(play.getTag().equals("play")){
-
-                    startTimer();
-                    play.setImageResource(R.drawable.ic_media_pause);
-                    play.setTag("pause");
-                }
-
-                else if(play.getTag().equals("pause")){
-
-                    pauseTimer();
-                    play.setImageResource(R.drawable.ic_media_play);
-                    play.setTag("play");
-                }
-            }
-        });
-
-         resetButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                resetTimer();
-            }
-        });
-
-
-        eraseButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                removeTimer();
-            }
-        });
     }
 
-    public void setTimer(TimerCounter timer){
 
-        this.countdownTimer = timer;
-    }
-
-    public void removeTimer(){
+    public void removeTimerView(){
 
         parent.removeView(timer);
-        countdownTimer.cancelTimer();
     }
 
-    public void updateTimer(String currentTime){
+    public void updateTimerView(String currentTime){
 
         time.setText(currentTime);
     }
 
-    public void resetTimer() {
+    public void resetTimerView() {
 
         time.setText(startingTime);
-        countdownTimer.cancelTimer();
-    }
-
-    public void startTimer(){
-
-        countdownTimer.startTimer();
-    }
-
-    public void pauseTimer(){
-
-        countdownTimer.cancelTimer();
     }
 }
 
