@@ -1,18 +1,12 @@
 package com.example.rafi.watchtimerv2;
 
 import android.content.Context;
-import android.media.Image;
-import android.os.CountDownTimer;
-import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 /**
  * Created by Rafi on 25/02/2016.
