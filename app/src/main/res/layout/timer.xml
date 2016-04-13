@@ -33,7 +33,7 @@
             android:src="@drawable/ic_media_play"
             android:clickable="true"
             android:contentDescription="@null"
-            android:id="@+id/play"
+            android:id="@+id/playButton"
             android:tag="play">
         </ImageButton>
 
@@ -45,7 +45,7 @@
             android:src="@android:drawable/ic_menu_revert"
             android:clickable="true"
             android:contentDescription="@null"
-            android:id="@+id/reset"
+            android:id="@+id/resetButton"
             android:tag="reset"/>
 
         <TextView
@@ -61,7 +61,7 @@
             android:tag="numberView"/>
 
         <ImageButton
-            android:id="@+id/borrarTimer"
+            android:id="@+id/eraseButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"

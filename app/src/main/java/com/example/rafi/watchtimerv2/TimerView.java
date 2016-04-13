@@ -25,11 +25,10 @@ public class TimerView extends LinearLayout{
     //Create a Linear Layout that will contain the timer's parent.
     private LinearLayout parent;
     private TextView time;
-
-    /*ImageButton playButton;
+    //And variables to store the timers' buttons.
+    ImageButton playButton;
     ImageButton resetButton;
     ImageButton eraseButton;
-    TextView numberView;*/
 
     //The constructor takes an initial time and a parent to attach the timer to.
     public TimerView(final Context context, String sTime, LinearLayout parent){
@@ -44,6 +43,10 @@ public class TimerView extends LinearLayout{
         //Then set the timer to the initial time
         this.time = (TextView) timer.findViewById(R.id.numberView);
         time.setText(sTime);
+        //And set the buttons to this object button variables
+        this.playButton = (ImageButton) findViewById(R.id.play);
+        this.eraseButton = (ImageButton) findViewById(R.id.eraseButton);
+        this.resetButton = (ImageButton) findViewById(R.id.resetButton);
     }
 
 
@@ -57,8 +60,8 @@ public class TimerView extends LinearLayout{
         time.setText(sTime);
     }
 
-}
-/*
+
+
     playButton.setOnClickListener(new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -107,4 +110,10 @@ public class TimerView extends LinearLayout{
 
 
         }
-    });*/
+    });
+
+
+
+
+}
+
