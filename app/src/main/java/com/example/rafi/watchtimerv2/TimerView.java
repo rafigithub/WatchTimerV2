@@ -102,5 +102,10 @@ public class TimerView extends LinearLayout{
 
         time.setText(startingTime);
     }
+
+    public void startTimer(Timer timer){
+
+        timer.startTimer();
+    }
 }
 
