@@ -25,7 +25,7 @@ public class TimerView extends LinearLayout{
     private ImageButton eraseButton;
     private TextView time;
     //Create a variable to store the timer for this timerview
-    private Timer countdownTimer;
+    private TimerCounter countdownTimer;
     //Finally, a variable to store the starting time for the timer.
     private String startingTime;
 
@@ -90,7 +90,7 @@ public class TimerView extends LinearLayout{
         });
     }
 
-    public void setTimer(Timer timer){
+    public void setTimer(TimerCounter timer){
 
         this.countdownTimer = timer;
     }

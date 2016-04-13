@@ -5,12 +5,12 @@ import android.os.CountDownTimer;
 /**
  * Created by Rafi on 13/04/2016.
  */
-public class Timer {
+public class TimerCounter {
 
     CountDownTimer timer;
     private TimerView timerView;
 
-    public Timer(final TimerView timerView, String startingTime, long tick){
+    public TimerCounter(final TimerView timerView, String startingTime, long tick){
 
         String[] startingTimeSplit = startingTime.split(":");
         long minutes = Integer.parseInt(startingTimeSplit[0]);
