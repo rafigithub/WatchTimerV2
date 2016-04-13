@@ -11,7 +11,7 @@ public class Timer {
     private TimerView timerView;
     private TimerCounter timerCounter;
 
-    public Timer(TimerView timerView, TimerCounter timerCounter){
+    public Timer(TimerView timerView,final TimerCounter timerCounter){
 
         this.timerView = timerView;
         this.timerCounter = timerCounter;
@@ -26,19 +26,34 @@ public class Timer {
 
                 if(play.getTag().equals("play")){
 
-                    startTimer();
+                    timerCounter.startTimer();
                     play.setImageResource(R.drawable.ic_media_pause);
                     play.setTag("pause");
                 }
 
                 else if(play.getTag().equals("pause")){
 
-                    pauseTimer();
+                    timerCounter.cancelTimer();
                     play.setImageResource(R.drawable.ic_media_play);
                     play.setTag("play");
                 }
             }
         });
+
+        //Set the listener and event handler for the reset button
+        ImageButton resetButton = timerView.getResetButton();
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                timerCounter.cancelTimer();
+            }
+        });
+
+
+
+
+
 
     }
 
@@ -46,13 +61,7 @@ public class Timer {
 
     /*
 
-    resetButton.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
 
-            resetTimer();
-        }
-    });
 
 
     eraseButton.setOnClickListener(new OnClickListener() {
