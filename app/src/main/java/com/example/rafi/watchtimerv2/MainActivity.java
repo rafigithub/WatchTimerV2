@@ -49,7 +49,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class MainActivity extends Activity/* implements View.OnClickListener*/ {
+public class MainActivity extends Activity{
 
     boolean returningFromHidden;
     private final ArrayList<CountDownTimer> timerBasico=new ArrayList<>();
@@ -97,6 +97,7 @@ public class MainActivity extends Activity/* implements View.OnClickListener*/ {
         });
 
     }
+
 
  /*   @Override
     protected void onRestart(){
@@ -159,31 +160,5 @@ public class MainActivity extends Activity/* implements View.OnClickListener*/ {
         }
     }*/
 
-
-
-
-/*
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-    }
-*/
-
-
-
-    /*public void newTimerView(String time){
-
-        LayoutInflater inflater = getLayoutInflater();
-        LinearLayout parent = (LinearLayout) findViewById(R.id.contenedor);
-        ViewGroup main= (ViewGroup) findViewById(R.id.main);
-        ViewGroup timerFrame =(ViewGroup) inflater.inflate(R.layout.timer, main, false);
-        TextView numberFrame = (TextView) timerFrame.findViewById(R.id.numberView);
-        TextView originalTime = (TextView) timerFrame.findViewById(R.id.originalTime);
-        numberFrame.setText(time);
-        originalTime.setText(time);
-        parent.addView(timerFrame);
-
-    }*/
 }
 

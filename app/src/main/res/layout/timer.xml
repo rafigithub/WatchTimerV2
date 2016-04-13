@@ -69,7 +69,7 @@
             android:src="@android:drawable/ic_menu_delete"
             android:contentDescription="@null"
             android:clickable="true"
-            android:tag="borrar"/>
+            android:tag="erase"/>
 
     </LinearLayout>
 
