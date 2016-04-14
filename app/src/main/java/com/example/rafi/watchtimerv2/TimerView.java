@@ -77,9 +77,11 @@ public class TimerView extends LinearLayout{
     public void resetTimerView() {
 
         time.setText(startingTime);
+        playButton.setImageResource(R.drawable.ic_media_play);
+        playButton.setTag("play");
     }
 
-    public TextView getTime(){
+     public TextView getTime(){
 
         return time;
     }

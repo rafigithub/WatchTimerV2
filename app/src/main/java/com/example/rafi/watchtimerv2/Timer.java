@@ -1,7 +1,9 @@
 package com.example.rafi.watchtimerv2;
 
+import android.content.Context;
 import android.media.Image;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -13,9 +15,11 @@ public class Timer {
 
     private TimerView timerView;
     private CountDownTimer countDownTimer;
+    private Context context;
 
-    public Timer(final TimerView timerView){
+    public Timer(final TimerView timerView, Context context){
 
+        this.context = context;
         //setTimerView(timerView);
         this.timerView = timerView;
         //Set the listener and event handler for pressing the play button
@@ -49,7 +53,8 @@ public class Timer {
             @Override
             public void onClick(View v) {
 
-                cancelTimer();
+                if (countDownTimer!=null)
+                    cancelTimer();
                 timerView.resetTimerView();
             }
         });
@@ -60,7 +65,8 @@ public class Timer {
             @Override
             public void onClick(View v) {
 
-                cancelTimer();
+                if (countDownTimer!=null)
+                    cancelTimer();
                 timerView.removeTimerView();
             }
         });
@@ -97,7 +103,9 @@ public class Timer {
 
             @Override
             public void onFinish() {
-
+                Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                timerView.resetTimerView();
+                v.vibrate(250);
             }
         };
     }
