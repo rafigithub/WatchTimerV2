@@ -81,6 +81,34 @@ public class SetTimer extends DialogFragment {
             }
         });
 
+        mMinutePicker.setOnTouchListener(new OnSwipeTouchListener(getActivity().getApplicationContext()) {
+            @Override
+            public void onSwipeLeft() {
+                setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
+                parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
+                TimerView timerView = new TimerView(getActivity(),message, parent);
+                Timer timer = new Timer(timerView, getActivity());
+                dismiss();
+            }
+            public void onSwipeRight() {
+                dismiss();
+            }
+        });
+
+        mSecondPicker.setOnTouchListener(new OnSwipeTouchListener(getActivity().getApplicationContext()) {
+            @Override
+            public void onSwipeLeft() {
+                setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
+                parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
+                TimerView timerView = new TimerView(getActivity(),message, parent);
+                Timer timer = new Timer(timerView, getActivity());
+                dismiss();
+            }
+            public void onSwipeRight() {
+                dismiss();
+            }
+        });
+
     return vista;
     }
 

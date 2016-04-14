@@ -1,5 +1,8 @@
 package com.example.rafi.watchtimerv2;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.media.Image;
 import android.os.CountDownTimer;
@@ -17,7 +20,7 @@ public class Timer {
     private CountDownTimer countDownTimer;
     private Context context;
 
-    public Timer(final TimerView timerView, Context context){
+    public Timer(final TimerView timerView, final Context context){
 
         this.context = context;
         //setTimerView(timerView);
@@ -70,6 +73,27 @@ public class Timer {
                 timerView.removeTimerView();
             }
         });
+
+
+        /*timerView.setOnTouchListener(new OnSwipeTouchListener(context) {
+            @Override
+            public void onSwipeLeft() {
+
+                final Activity activity = (Activity) context;
+                FragmentManager fragmentManager = activity.getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                SetTimer fragment = new SetTimer();
+                fragmentTransaction.add(R.id.main, fragment);
+                fragmentTransaction.commit();
+            }
+
+            public void onSwipeRight() {
+
+                final Activity activity = (Activity) context;
+                activity.finish();
+                System.exit(0);
+            }
+        });*/
     }
 
 
