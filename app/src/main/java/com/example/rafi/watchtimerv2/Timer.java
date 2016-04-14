@@ -50,6 +50,7 @@ public class Timer {
             public void onClick(View v) {
 
                 cancelTimer();
+                timerView.resetTimerView();
             }
         });
 
@@ -63,14 +64,10 @@ public class Timer {
                 timerView.removeTimerView();
             }
         });
-
-
-
-
     }
 
 
-    public CountDownTimer getCountDownTimer(){
+    /*public CountDownTimer getCountDownTimer(){
 
         return countDownTimer;
     }
@@ -78,7 +75,7 @@ public class Timer {
     public TimerView getTimerView(){
 
         return timerView;
-    }
+    }*/
 
     /*public void setTimerView(TimerView timerView){
 
@@ -104,6 +101,17 @@ public class Timer {
             }
         };
     }
+
+    private void startTimer(){
+
+        countDownTimer.start();
+    }
+
+    private void cancelTimer(){
+
+        countDownTimer.cancel();
+    }
+
 
 
 

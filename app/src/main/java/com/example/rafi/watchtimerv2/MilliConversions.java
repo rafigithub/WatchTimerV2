@@ -22,7 +22,7 @@ public class MilliConversions {
     }
 
     public static long minSecToMilli(long[] minSec){
-        return minSec[0]*1000+minSec[1]*60*1000;
+        return minSec[1]*1000+minSec[0]*60*1000;
     }
 
     public static long[] stringToMinSec(String timeString){
