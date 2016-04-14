@@ -78,5 +78,11 @@ public class TimerView extends LinearLayout{
 
         time.setText(startingTime);
     }
+
+    public TextView getTime(){
+
+        return time;
+    }
+
 }
 

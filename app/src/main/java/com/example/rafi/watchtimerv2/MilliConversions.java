@@ -21,5 +21,30 @@ public class MilliConversions {
         return seconds*1000+minutes*60*1000;
     }
 
+    public static long minSecToMilli(long[] minSec){
+        return minSec[0]*1000+minSec[1]*60*1000;
+    }
+
+    public static long[] stringToMinSec(String timeString){
+
+        String[] timeStringSplit = timeString.split(":");
+        long minutes = Integer.parseInt(timeStringSplit[0]);
+        long seconds = Integer.parseInt(timeStringSplit[1]);
+        long[] timeMinSec = {minutes, seconds};
+        return timeMinSec;
+    }
+
+    public static long stringToMilli(String timeString){
+
+        return MilliConversions.minSecToMilli(MilliConversions.stringToMinSec(timeString));
+    }
+
+    public static String milliToString (long millis){
+
+        long[] minSec = MilliConversions.milliToMinSec(millis);
+        String milliToString = String.format("%02d:%02d",minSec[0],minSec[1]);
+        return milliToString;
+    }
+
 
 }
