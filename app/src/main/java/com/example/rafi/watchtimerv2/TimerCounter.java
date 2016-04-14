@@ -18,7 +18,7 @@ public class TimerCounter {
         long seconds = Integer.parseInt(startingTimeSplit[1]);
         long numericStartingTime = MilliConversions.minSecToMilli(minutes, seconds);
 
-        this.timer = new CountDownTimer(numericStartingTime, tick) {
+        /*this.timer = new CountDownTimer(numericStartingTime, tick) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -31,7 +31,7 @@ public class TimerCounter {
 
 
             }
-        };
+        };*/
     }
 
     public String getCurrentTime(){
