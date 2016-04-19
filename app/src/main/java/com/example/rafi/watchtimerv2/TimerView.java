@@ -88,5 +88,10 @@ public class TimerView extends LinearLayout{
         return time;
     }
 
+    public String getStartingTime(){
+
+        return startingTime;
+    }
+
 }
 

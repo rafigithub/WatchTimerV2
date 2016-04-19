@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.media.Image;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,6 +20,10 @@ public class Timer {
     private TimerView timerView;
     private CountDownTimer countDownTimer;
     private Context context;
+    private Handler handler = new Handler();
+    private long millisRemaining;
+    private Runnable timerRun;
+
 
     public Timer(final TimerView timerView, final Context context){
 
@@ -35,7 +40,6 @@ public class Timer {
 
                 if(play.getTag().equals("play")){
 
-                    setUpTimer();
                     startTimer();
                     play.setImageResource(R.drawable.ic_media_pause);
                     play.setTag("pause");
@@ -58,6 +62,7 @@ public class Timer {
 
                 if (countDownTimer!=null)
                     cancelTimer();
+                    setUpTimer();
                 timerView.resetTimerView();
             }
         });
@@ -94,6 +99,7 @@ public class Timer {
                 System.exit(0);
             }
         });*/
+        setUpTimer();
     }
 
 
@@ -114,35 +120,37 @@ public class Timer {
 
     private void setUpTimer(){
 
-        String timeString = timerView.getTime().getText().toString();
-        long timeMillis = MilliConversions.stringToMilli(timeString);
-        countDownTimer = new CountDownTimer(timeMillis, 100) {
-            @Override
-            public void onTick(long millisUntilFinished) {
+        final String timeString = timerView.getStartingTime();
+        millisRemaining = MilliConversions.stringToMilli(timeString);
 
-                String timeString = MilliConversions.milliToString(millisUntilFinished);
+        timerRun = new Runnable() {
+            @Override
+            public void run() {
                 TextView time = timerView.getTime();
                 time.setText(timeString);
-            }
-
-            @Override
-            public void onFinish() {
-                Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                timerView.resetTimerView();
-                v.vibrate(250);
+                if(millisRemaining<=50)
+                {
+                    Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                    timerView.resetTimerView();
+                    v.vibrate(250);
+                }
+                else{
+                    millisRemaining=-1000;
+                    handler.postDelayed(this, 1000);
+                }
             }
         };
     }
 
-    /*private void startTimer(){
+    private void startTimer(){
 
-        countDownTimer.start();
+        handler.post(timerRun);
     }
 
     private void cancelTimer(){
 
-        countDownTimer.cancel();
-    }*/
+        handler.removeCallbacks(timerRun);
+    }
 
 
 
