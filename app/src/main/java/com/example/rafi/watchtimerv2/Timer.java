@@ -18,7 +18,6 @@ import android.widget.TextView;
 public class Timer {
 
     private TimerView timerView;
-    private CountDownTimer countDownTimer;
     private Context context;
     private Handler handler = new Handler();
     private long millisRemaining;
@@ -60,9 +59,8 @@ public class Timer {
             @Override
             public void onClick(View v) {
 
-                if (countDownTimer!=null)
-                    cancelTimer();
-                    setUpTimer();
+                cancelTimer();
+                setUpTimer();
                 timerView.resetTimerView();
             }
         });
@@ -73,8 +71,7 @@ public class Timer {
             @Override
             public void onClick(View v) {
 
-                if (countDownTimer!=null)
-                    cancelTimer();
+                cancelTimer();
                 timerView.removeTimerView();
             }
         });
@@ -103,21 +100,6 @@ public class Timer {
     }
 
 
-    /*public CountDownTimer getCountDownTimer(){
-
-        return countDownTimer;
-    }
-
-    public TimerView getTimerView(){
-
-        return timerView;
-    }*/
-
-    /*public void setTimerView(TimerView timerView){
-
-        this.timerView = timerView;
-    }*/
-
     private void setUpTimer(){
 
         final String timeString = timerView.getStartingTime();
@@ -127,7 +109,8 @@ public class Timer {
             @Override
             public void run() {
                 TextView time = timerView.getTime();
-                time.setText(timeString);
+                String timeRemaining = MilliConversions.milliToString(millisRemaining);
+                time.setText(timeRemaining);
                 if(millisRemaining<=50)
                 {
                     Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -135,8 +118,8 @@ public class Timer {
                     v.vibrate(250);
                 }
                 else{
-                    millisRemaining=-1000;
-                    handler.postDelayed(this, 1000);
+                    millisRemaining=millisRemaining-200;
+                    handler.postDelayed(this, 200);
                 }
             }
         };
