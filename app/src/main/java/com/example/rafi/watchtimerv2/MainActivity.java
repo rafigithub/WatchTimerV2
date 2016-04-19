@@ -52,7 +52,6 @@ import java.util.ArrayList;
 public class MainActivity extends Activity{
 
     boolean returningFromHidden;
-    private final ArrayList<CountDownTimer> timerBasico=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +77,22 @@ public class MainActivity extends Activity{
             }
         }*/
 
+        if(savedInstanceState!=null){
+            LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
+            ArrayList<Integer> millisRemaining = savedInstanceState.getIntegerArrayList("millisRemaining");
+            long timeLeaving = savedInstanceState.getLong("timeLeaving");
+            long currentTime = System.currentTimeMillis();
+            long timeAbsent = currentTime - timeLeaving;
+            for(Integer millis: millisRemaining){
+
+                long millisLong = millis.longValue();
+                String message = MilliConversions.milliToString(millisLong-timeAbsent);
+                TimerView timerView = new TimerView(this,message, timerContainer);
+                Timer timer = new Timer(timerView, this);
+                timer.startTimer();
+            }
+        }
+
         View main = findViewById(R.id.main);
         main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
             @Override
@@ -95,7 +110,6 @@ public class MainActivity extends Activity{
                 System.exit(0);
             }
         });
-
     }
 
 
@@ -160,12 +174,28 @@ public class MainActivity extends Activity{
         }
     }*/
 
+
+
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
+    protected void onStop(){
 
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putLong("millisRemaining", Timer.);
+        super.onStop();
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
+        ArrayList<Integer> millisRemaining = new ArrayList<>();
+        for (int i=0; i<timerContainer.getChildCount();i++){
 
+            View child = timerContainer.getChildAt(i);
+            if (child instanceof TextView){
+
+                Long mR = MilliConversions.stringToMilli(((TextView) child).getText().toString());
+                int milliRem = Integer.valueOf(mR.intValue());
+                millisRemaining.add(milliRem);
+                savedInstanceState.putIntegerArrayList("millisRemaining", millisRemaining);
+            }
+            long timeLeaving = System.currentTimeMillis();
+            savedInstanceState.putLong("timeLeaving", timeLeaving);
+        }
     }
 }
 

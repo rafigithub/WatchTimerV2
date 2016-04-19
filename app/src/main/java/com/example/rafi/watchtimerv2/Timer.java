@@ -125,7 +125,7 @@ public class Timer {
         };
     }
 
-    private void startTimer(){
+    public void startTimer(){
 
         handler.post(timerRun);
     }
