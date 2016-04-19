@@ -134,7 +134,7 @@ public class Timer {
         };
     }
 
-    private void startTimer(){
+    /*private void startTimer(){
 
         countDownTimer.start();
     }
@@ -142,7 +142,7 @@ public class Timer {
     private void cancelTimer(){
 
         countDownTimer.cancel();
-    }
+    }*/
 
 
 
