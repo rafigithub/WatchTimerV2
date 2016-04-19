@@ -135,7 +135,10 @@ public class Timer {
         handler.removeCallbacks(timerRun);
     }
 
+    public long getMillisRemaining(){
 
+        return millisRemaining;
+    }
 
 
 

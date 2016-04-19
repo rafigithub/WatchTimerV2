@@ -160,5 +160,12 @@ public class MainActivity extends Activity{
         }
     }*/
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putLong("millisRemaining", Timer.);
+
+    }
 }
 
