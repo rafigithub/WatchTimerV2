@@ -48,6 +48,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MainActivity extends Activity{
 
@@ -76,22 +77,23 @@ public class MainActivity extends Activity{
                 parent.addView(timerFrame);
             }
         }*/
-
-        if(savedInstanceState!=null){
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        Map<String, ?> allEntries = sharedPref.getAll();
+        //if(savedInstanceState!=null){
             LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
-            ArrayList<Integer> millisRemaining = savedInstanceState.getIntegerArrayList("millisRemaining");
-            long timeLeaving = savedInstanceState.getLong("timeLeaving");
-            long currentTime = System.currentTimeMillis();
-            long timeAbsent = currentTime - timeLeaving;
-            for(Integer millis: millisRemaining){
+            //ArrayList<Integer> millisRemaining = savedInstanceState.getIntegerArrayList("millisRemaining");
+            //long timeLeaving = savedInstanceState.getLong("timeLeaving");
+            //long currentTime = System.currentTimeMillis();
+            //long timeAbsent = currentTime - timeLeaving;
+            //for(Integer millis: millisRemaining){
 
-                long millisLong = millis.longValue();
-                String message = MilliConversions.milliToString(millisLong-timeAbsent);
-                TimerView timerView = new TimerView(this,message, timerContainer);
-                Timer timer = new Timer(timerView, this);
-                timer.startTimer();
-            }
-        }
+              //  long millisLong = millis.longValue();
+               // String message = MilliConversions.milliToString(millisLong-timeAbsent);
+               // TimerView timerView = new TimerView(this,message, timerContainer);
+               // Timer timer = new Timer(timerView, this);
+               // timer.startTimer();
+            //}
+        //}
 
         View main = findViewById(R.id.main);
         main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
@@ -181,20 +183,22 @@ public class MainActivity extends Activity{
 
         super.onStop();
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
-        ArrayList<Integer> millisRemaining = new ArrayList<>();
+        //ArrayList<Integer> millisRemaining = new ArrayList<>();
         for (int i=0; i<timerContainer.getChildCount();i++){
 
             View child = timerContainer.getChildAt(i);
             if (child instanceof TextView){
-
-                Long mR = MilliConversions.stringToMilli(((TextView) child).getText().toString());
-                int milliRem = Integer.valueOf(mR.intValue());
-                millisRemaining.add(milliRem);
-                savedInstanceState.putIntegerArrayList("millisRemaining", millisRemaining);
+                long millisRemaining = MilliConversions.stringToMilli(((TextView) child).getText().toString());
+               // Long mR = MilliConversions.stringToMilli(((TextView) child).getText().toString());
+                //int milliRem = Integer.valueOf(mR.intValue());
+                //millisRemaining.add(milliRem);
+                editor.putLong("millisRemaining"+i, millisRemaining);
             }
             long timeLeaving = System.currentTimeMillis();
-            savedInstanceState.putLong("timeLeaving", timeLeaving);
+            editor.putLong("timeLeaving", timeLeaving);
+            editor.commit();
         }
     }
 }
