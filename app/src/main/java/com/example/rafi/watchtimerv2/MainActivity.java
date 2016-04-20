@@ -98,14 +98,14 @@ public class MainActivity extends Activity{
         LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
         long currentTime = System.currentTimeMillis();
         long timeAbsent = currentTime - timeLeaving;
-        for(Long millis: millisRemaining){
+        /*for(Long millis: millisRemaining){
 
             long millisLong = millis.longValue();
             String message = MilliConversions.milliToString(millisLong-timeAbsent);
             TimerView timerView = new TimerView(this,message, timerContainer);
             Timer timer = new Timer(timerView, this);
             timer.startTimer();
-        }
+        }*/
 
         View main = findViewById(R.id.main);
         main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
@@ -216,6 +216,7 @@ public class MainActivity extends Activity{
             Type type = new TypeToken<ArrayList<Long>>(){}.getType();
             String json = gson.toJson(millisRemaining, type);
             editor.putString("times", json);
+            editor.apply();
             long timeLeaving = System.currentTimeMillis();
             editor.putLong("timeLeaving", timeLeaving);
             editor.apply();
