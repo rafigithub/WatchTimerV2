@@ -50,9 +50,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class MainActivity extends Activity{
+public class MainActivity extends Activity implements SetTimer.OnDataPass{
 
     boolean returningFromHidden;
+    ArrayList<Timer> allTimers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +80,8 @@ public class MainActivity extends Activity{
         }*/
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         long timeLeaving=0;
-        ArrayList<Long> millisRemaining = new ArrayList<>();
-        Map<String, ?> results = sharedPref.getAll();
+        //ArrayList<Long> millisRemaining = new ArrayList<>();
+        //Map<String, ?> results = sharedPref.getAll();
         if(sharedPref.contains("timeLeaving")){
 
             timeLeaving = sharedPref.getLong("timeLeaving", 0);
@@ -89,22 +90,28 @@ public class MainActivity extends Activity{
         if(sharedPref.contains("times")){
 
             Gson gson = new Gson();
-            String json = sharedPref.getString("times", "default");
-            Type type = new TypeToken<ArrayList<Long>>() {
+            String json = sharedPref.getString("times", null);
+            Type type = new TypeToken<ArrayList<Timer>>() {
             }.getType();
-            millisRemaining = gson.fromJson(json, type);
+            allTimers = gson.fromJson(json, type);
         }
 
-        LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
+       /* LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
         long currentTime = System.currentTimeMillis();
         long timeAbsent = currentTime - timeLeaving;
-        /*for(Long millis: millisRemaining){
+        for(Long millis: millisRemaining){
 
             long millisLong = millis.longValue();
-            String message = MilliConversions.milliToString(millisLong-timeAbsent);
-            TimerView timerView = new TimerView(this,message, timerContainer);
-            Timer timer = new Timer(timerView, this);
-            timer.startTimer();
+            if(millisLong-timeAbsent>0){
+
+                String message = MilliConversions.milliToString(millisLong-timeAbsent);
+                TimerView timerView = new TimerView(this,message, timerContainer);
+                Timer timer = new Timer(timerView, this);
+                timer.startTimer();
+            }else{
+                TimerView timerView = new TimerView(this, "00:00", timerContainer);
+                Timer timer = new Timer(timerView, this);
+            }
         }*/
 
         View main = findViewById(R.id.main);
@@ -198,7 +205,7 @@ public class MainActivity extends Activity{
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.clear();
         editor.apply();
-        ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
+        /*ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
         ArrayList<Long> millisRemaining = new ArrayList<>();
         for (int i=0; i<timerContainer.getChildCount();i++){
             LinearLayout timerViewParent =(LinearLayout) timerContainer.getChildAt(i);
@@ -211,16 +218,22 @@ public class MainActivity extends Activity{
                         millisRemaining.add(milliRem);
                     }
                 }
-            }
+            }*/
             Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<Long>>(){}.getType();
-            String json = gson.toJson(millisRemaining, type);
+            Type type = new TypeToken<ArrayList<Timer>>(){}.getType();
+            String json = gson.toJson(allTimers, type);
             editor.putString("times", json);
             //editor.apply();
             long timeLeaving = System.currentTimeMillis();
             editor.putLong("timeLeaving", timeLeaving);
             editor.apply();
-        }
+        //}
+    }
+
+    @Override
+    public void onDataPass(Timer timer) {
+
+        allTimers.add(timer);
     }
 }
 

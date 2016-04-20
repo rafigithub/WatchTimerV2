@@ -40,8 +40,6 @@ public class Timer {
                 if(play.getTag().equals("play")){
 
                     startTimer();
-                    play.setImageResource(R.drawable.ic_media_pause);
-                    play.setTag("pause");
                 }
 
                 else if(play.getTag().equals("pause")){
@@ -127,6 +125,9 @@ public class Timer {
 
     public void startTimer(){
 
+        ImageButton play = timerView.getPlayButton();
+        play.setImageResource(R.drawable.ic_media_pause);
+        play.setTag("pause");
         handler.post(timerRun);
     }
 
