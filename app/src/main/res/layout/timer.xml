@@ -19,12 +19,6 @@
         android:paddingTop="2dp"
         android:paddingBottom="2dp">
 
-        <TextView
-            android:id="@+id/originalTime"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:tag="originalNumber"/>
-
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

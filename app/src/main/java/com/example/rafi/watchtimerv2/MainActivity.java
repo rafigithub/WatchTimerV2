@@ -78,22 +78,34 @@ public class MainActivity extends Activity{
             }
         }*/
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        Map<String, ?> allEntries = sharedPref.getAll();
-        //if(savedInstanceState!=null){
-            LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
-            //ArrayList<Integer> millisRemaining = savedInstanceState.getIntegerArrayList("millisRemaining");
-            //long timeLeaving = savedInstanceState.getLong("timeLeaving");
-            //long currentTime = System.currentTimeMillis();
-            //long timeAbsent = currentTime - timeLeaving;
-            //for(Integer millis: millisRemaining){
+        long timeLeaving=0;
+        ArrayList<Long> millisRemaining = new ArrayList<>();
 
-              //  long millisLong = millis.longValue();
-               // String message = MilliConversions.milliToString(millisLong-timeAbsent);
-               // TimerView timerView = new TimerView(this,message, timerContainer);
-               // Timer timer = new Timer(timerView, this);
-               // timer.startTimer();
-            //}
-        //}
+        if(sharedPref.contains("timeLeaving")){
+
+            timeLeaving = sharedPref.getLong("timeLeaving", 0);
+        }
+
+        if(sharedPref.contains("times")){
+
+            Gson gson = new Gson();
+            String json = sharedPref.getString("tiempos", "");
+            Type type = new TypeToken<ArrayList<Long>>() {
+            }.getType();
+            millisRemaining = gson.fromJson(json, type);
+        }
+
+        LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
+        long currentTime = System.currentTimeMillis();
+        long timeAbsent = currentTime - timeLeaving;
+        for(Long millis: millisRemaining){
+
+            long millisLong = millis.longValue();
+            String message = MilliConversions.milliToString(millisLong-timeAbsent);
+            TimerView timerView = new TimerView(this,message, timerContainer);
+            Timer timer = new Timer(timerView, this);
+            timer.startTimer();
+        }
 
         View main = findViewById(R.id.main);
         main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
@@ -184,21 +196,29 @@ public class MainActivity extends Activity{
         super.onStop();
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
+        editor.apply();
         ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
-        //ArrayList<Integer> millisRemaining = new ArrayList<>();
+        ArrayList<Long> millisRemaining = new ArrayList<>();
         for (int i=0; i<timerContainer.getChildCount();i++){
-
-            View child = timerContainer.getChildAt(i);
-            if (child instanceof TextView){
-                long millisRemaining = MilliConversions.stringToMilli(((TextView) child).getText().toString());
-               // Long mR = MilliConversions.stringToMilli(((TextView) child).getText().toString());
-                //int milliRem = Integer.valueOf(mR.intValue());
-                //millisRemaining.add(milliRem);
-                editor.putLong("millisRemaining"+i, millisRemaining);
+            LinearLayout timerViewParent =(LinearLayout) timerContainer.getChildAt(i);
+            for (int j=0; j<timerViewParent.getChildCount();j++){
+                LinearLayout timerViewChild = (LinearLayout) timerViewParent.getChildAt(j);
+                for (int k=0; k<timerViewChild.getChildCount();k++){
+                    View textView = timerViewChild.getChildAt(k);
+                    if (textView instanceof TextView){
+                        long milliRem = MilliConversions.stringToMilli(((TextView) textView).getText().toString());
+                        millisRemaining.add(milliRem);
+                    }
+                }
             }
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<Long>>(){}.getType();
+            String json = gson.toJson(millisRemaining, type);
+            editor.putString("times", json);
             long timeLeaving = System.currentTimeMillis();
             editor.putLong("timeLeaving", timeLeaving);
-            editor.commit();
+            editor.apply();
         }
     }
 }
