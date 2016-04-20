@@ -80,7 +80,7 @@ public class MainActivity extends Activity{
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         long timeLeaving=0;
         ArrayList<Long> millisRemaining = new ArrayList<>();
-
+        Map<String, ?> results = sharedPref.getAll();
         if(sharedPref.contains("timeLeaving")){
 
             timeLeaving = sharedPref.getLong("timeLeaving", 0);
@@ -89,7 +89,7 @@ public class MainActivity extends Activity{
         if(sharedPref.contains("times")){
 
             Gson gson = new Gson();
-            String json = sharedPref.getString("tiempos", "");
+            String json = sharedPref.getString("times", "default");
             Type type = new TypeToken<ArrayList<Long>>() {
             }.getType();
             millisRemaining = gson.fromJson(json, type);
@@ -216,7 +216,7 @@ public class MainActivity extends Activity{
             Type type = new TypeToken<ArrayList<Long>>(){}.getType();
             String json = gson.toJson(millisRemaining, type);
             editor.putString("times", json);
-            editor.apply();
+            //editor.apply();
             long timeLeaving = System.currentTimeMillis();
             editor.putLong("timeLeaving", timeLeaving);
             editor.apply();
