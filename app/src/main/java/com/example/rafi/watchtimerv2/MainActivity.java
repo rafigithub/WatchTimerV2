@@ -55,7 +55,9 @@ public class MainActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        if (savedInstanceState == null){
+
+            setContentView(R.layout.activity_main);
         /*SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         long timeLeaving=0;
         ArrayList<Long> millisRemaining = new ArrayList<>();
@@ -92,23 +94,26 @@ public class MainActivity extends Activity{
             }
         }*/
 
-        View main = findViewById(R.id.main);
-        main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
-            @Override
-            public void onSwipeLeft() {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                SetTimer fragment = new SetTimer();
-                fragmentTransaction.add(R.id.main, fragment);
-                fragmentTransaction.commit();
-            }
+            View main = findViewById(R.id.main);
+            main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+                @Override
+                public void onSwipeLeft() {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    SetTimer fragment = new SetTimer();
+                    fragmentTransaction.add(R.id.main, fragment);
+                    fragmentTransaction.commit();
+                }
 
             /*public void onSwipeRight() {
                 //onStop();
                 *//*finish();
                 System.exit(0);*//*
             }*/
-        });
+            });
+
+        }
+
     }
 
     /*@Override

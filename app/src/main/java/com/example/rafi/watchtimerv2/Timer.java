@@ -11,6 +11,7 @@ import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Rafi on 13/04/2016.
@@ -22,6 +23,7 @@ public class Timer {
     private Handler handler = new Handler();
     private long millisRemaining;
     private Runnable timerRun;
+    private CountDownTimer testTimer;
 
 
     public Timer(final TimerView timerView, final Context context){
@@ -104,7 +106,28 @@ public class Timer {
         final String timeString = timerView.getStartingTime();
         millisRemaining = MilliConversions.stringToMilli(timeString);
 
-        timerRun = new Runnable() {
+         testTimer  = new CountDownTimer(millisRemaining, 400) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                TextView time = timerView.getTime();
+                String timeRemaining = MilliConversions.milliToString(millisUntilFinished);
+                time.setText(timeRemaining);
+
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                timerView.resetTimerView();
+                v.vibrate(250);
+                Toast.makeText(context,"finish countdowntimer",Toast.LENGTH_SHORT).show();
+            }
+        };
+
+       /* timerRun = new Runnable() {
             @Override
             public void run() {
                 TextView time = timerView.getTime();
@@ -115,23 +138,26 @@ public class Timer {
                     Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
                     timerView.resetTimerView();
                     v.vibrate(250);
+                    Toast.makeText(context,"finish handler",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    millisRemaining=millisRemaining-200;
-                    handler.postDelayed(this, 200);
+                    millisRemaining=millisRemaining-400;
+                    handler.postDelayed(this, 400);
                 }
             }
-        };
+        };*/
     }
 
     public void startTimer(){
 
-        handler.post(timerRun);
+        //handler.post(timerRun);
+        testTimer.start();
     }
 
     private void cancelTimer(){
 
-        handler.removeCallbacks(timerRun);
+        testTimer.cancel();
+        //handler.removeCallbacks(timerRun);
     }
 
     public long getMillisRemaining(){
