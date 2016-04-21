@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;

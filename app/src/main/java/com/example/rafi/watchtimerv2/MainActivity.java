@@ -59,25 +59,7 @@ public class MainActivity extends Activity implements SetTimer.OnDataPass{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*if(savedInstanceState!=null){
-            SharedPreferences appSharedPrefs = PreferenceManager
-                    .getDefaultSharedPreferences(this.getApplicationContext());
-            Gson gson = new Gson();
-            String json = appSharedPrefs.getString("MyObject", "");
-            Type type = new TypeToken<ArrayList<String>>(){}.getType();
-            ArrayList<String> tiempos= gson.fromJson(json, type);
-            LayoutInflater inflater = getLayoutInflater();
-            final ViewGroup main= (ViewGroup) findViewById(R.id.main);
-            final LinearLayout parent = (LinearLayout) findViewById(R.id.contenedor);
-            for (int i=0;i<tiempos.size();i++){
-                View timerFrame = inflater.inflate(R.layout.timer, main, false);
-                TextView numberFrame = (TextView) timerFrame.findViewById(R.id.numberView);
-                TextView originalTime = (TextView) timerFrame.findViewById(R.id.originalTime);
-                numberFrame.setText(tiempos.get(i));
-                originalTime.setText(tiempos.get(i));
-                parent.addView(timerFrame);
-            }
-        }*/
+
         /*SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         long timeLeaving=0;
         //ArrayList<Long> millisRemaining = new ArrayList<>();
@@ -169,7 +151,7 @@ public class MainActivity extends Activity implements SetTimer.OnDataPass{
 
     @Override
     protected void onStop() {
-
+        boolean isRunning=false;
         super.onStop();
 
         ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
@@ -180,7 +162,10 @@ public class MainActivity extends Activity implements SetTimer.OnDataPass{
                 LinearLayout timerViewChild = (LinearLayout) timerViewParent.getChildAt(j);
                 for (int k = 0; k < timerViewChild.getChildCount(); k++) {
                     View textView = timerViewChild.getChildAt(k);
-                    if (textView instanceof TextView) {
+                    if(textView instanceof ImageButton && textView.getTag().equals("pause")){
+                        isRunning = true;
+                    }
+                    if (textView instanceof TextView && isRunning) {
                         long milliRem = MilliConversions.stringToMilli(((TextView) textView).getText().toString());
                         millisRemaining.add((int) milliRem);
                     }
