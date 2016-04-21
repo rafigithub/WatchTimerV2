@@ -22,9 +22,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".TimerCounter"
-            android:exported="false"></service>
     </application>
 
 </manifest>
