@@ -74,38 +74,21 @@ public class Timer {
             }
         });
 
-
-        /*timerView.setOnTouchListener(new OnSwipeTouchListener(context) {
-            @Override
-            public void onSwipeLeft() {
-
-                final Activity activity = (Activity) context;
-                FragmentManager fragmentManager = activity.getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                SetTimer fragment = new SetTimer();
-                fragmentTransaction.add(R.id.main, fragment);
-                fragmentTransaction.commit();
-            }
-
-            public void onSwipeRight() {
-
-                final Activity activity = (Activity) context;
-                activity.finish();
-                System.exit(0);
-            }
-        });*/
         setUpTimer();
     }
 
 
     private void setUpTimer(){
 
+        final int timerViewTimeId = timerView.getTime().getId();
         final String timeString = timerView.getStartingTime();
         millisRemaining = MilliConversions.stringToMilli(timeString);
+
 
         timerRun = new Runnable() {
             @Override
             public void run() {
+
                 TextView time = timerView.getTime();
                 String timeRemaining = MilliConversions.milliToString(millisRemaining);
                 time.setText(timeRemaining);

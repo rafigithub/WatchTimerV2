@@ -78,7 +78,7 @@ public class MainActivity extends Activity implements SetTimer.OnDataPass{
                 parent.addView(timerFrame);
             }
         }*/
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        /*SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         long timeLeaving=0;
         //ArrayList<Long> millisRemaining = new ArrayList<>();
         //Map<String, ?> results = sharedPref.getAll();
@@ -94,7 +94,7 @@ public class MainActivity extends Activity implements SetTimer.OnDataPass{
             Type type = new TypeToken<ArrayList<Timer>>() {
             }.getType();
             allTimers = gson.fromJson(json, type);
-        }
+        }*/
 
        /* LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
         long currentTime = System.currentTimeMillis();
@@ -197,7 +197,7 @@ public class MainActivity extends Activity implements SetTimer.OnDataPass{
 
 
 
-    @Override
+    /*@Override
     protected void onStop(){
 
         super.onStop();
@@ -205,7 +205,7 @@ public class MainActivity extends Activity implements SetTimer.OnDataPass{
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.clear();
         editor.apply();
-        /*ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
+        *//*ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
         ArrayList<Long> millisRemaining = new ArrayList<>();
         for (int i=0; i<timerContainer.getChildCount();i++){
             LinearLayout timerViewParent =(LinearLayout) timerContainer.getChildAt(i);
@@ -218,17 +218,17 @@ public class MainActivity extends Activity implements SetTimer.OnDataPass{
                         millisRemaining.add(milliRem);
                     }
                 }
-            }*/
-            Gson gson = new Gson();
+            }*//*
+            *//*Gson gson = new Gson();
             Type type = new TypeToken<ArrayList<Timer>>(){}.getType();
             String json = gson.toJson(allTimers, type);
-            editor.putString("times", json);
+            editor.putString("times", json);*//*
             //editor.apply();
             long timeLeaving = System.currentTimeMillis();
             editor.putLong("timeLeaving", timeLeaving);
             editor.apply();
         //}
-    }
+    }*/
 
     @Override
     public void onDataPass(Timer timer) {

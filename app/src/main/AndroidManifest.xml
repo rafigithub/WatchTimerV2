@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rafi.watchtimerv2">
 
     <uses-feature android:name="android.hardware.type.watch" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -23,7 +22,9 @@
             </intent-filter>
         </activity>
 
-
+        <service
+            android:name=".TimerCounter"
+            android:exported="false"></service>
     </application>
 
 </manifest>
