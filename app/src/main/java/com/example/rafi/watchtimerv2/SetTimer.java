@@ -57,7 +57,6 @@ public class SetTimer extends DialogFragment {
                 parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
                 TimerView timerView = new TimerView(getActivity(),message, parent);
                 Timer timer = new Timer(timerView, getActivity());
-                passData(timer);
                 dismiss();
             }
             public void onSwipeRight() {
@@ -113,25 +112,6 @@ public class SetTimer extends DialogFragment {
 
     return vista;
     }
-
-    public interface OnDataPass{
-        void onDataPass(Timer timer);
-    }
-
-    OnDataPass dataPasser;
-
-    @Override
-    public void onAttach(Activity a){
-
-        super.onAttach(a);
-        dataPasser = (OnDataPass) a;
-    }
-
-    public void passData(Timer timer){
-
-        dataPasser.onDataPass(timer);
-    }
-
 
     //Overloaded functions to set up number pickers.
     private void numberPickerSetup(NumberPicker numberPicker, int maxValue, int minValue, int setValue, boolean wrapWheel){
