@@ -80,10 +80,8 @@ public class Timer {
 
     private void setUpTimer(){
 
-        final int timerViewTimeId = timerView.getTime().getId();
         final String timeString = timerView.getStartingTime();
         millisRemaining = MilliConversions.stringToMilli(timeString);
-
 
         timerRun = new Runnable() {
             @Override

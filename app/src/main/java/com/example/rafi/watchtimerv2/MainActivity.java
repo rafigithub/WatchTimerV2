@@ -134,70 +134,7 @@ public class MainActivity extends Activity implements SetTimer.OnDataPass{
     }
 
 
- /*   @Override
-    protected void onRestart(){
-        super.onRestart();
-        returningFromHidden=true;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        ViewGroup nivel0 = (ViewGroup) findViewById(R.id.contenedor);
-        ArrayList<String> tiempos = new ArrayList<>();
-        SharedPreferences appSharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this.getApplicationContext());
-        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-        for (int i=0; i<nivel0.getChildCount();i++){
-            ViewGroup nivel1= (ViewGroup) nivel0.getChildAt(i);
-            ViewGroup nivel2 = (ViewGroup) nivel1.getChildAt(0);
-            outer:for (int j=0; j<nivel2.getChildCount();j++) {
-                View child = nivel2.getChildAt(j);
-                if (child.getTag().equals("originalNumber")) {
-                    String tiempo = ((TextView) child).getText().toString();
-                    tiempos.add(tiempo);
-                    break outer;
-                }
-            }
-        }
-        Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<String>>(){}.getType();
-        String json = gson.toJson(tiempos, type);
-        prefsEditor.putString("MyObject", json);
-        prefsEditor.apply();
-    }
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-
-        ViewGroup main= (ViewGroup) findViewById(R.id.main);
-        SharedPreferences appSharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this.getApplicationContext());
-        if (appSharedPrefs.contains("MyObject") && !returningFromHidden){
-
-            Gson gson = new Gson();
-            String json = appSharedPrefs.getString("MyObject", "");
-            Type type = new TypeToken<ArrayList<String>>() {
-            }.getType();
-            ArrayList<String> tiempos = gson.fromJson(json, type);
-            LayoutInflater inflater = getLayoutInflater();
-//            final ViewGroup main = (ViewGroup) findViewById(R.id.main);
-            final LinearLayout parent = (LinearLayout) findViewById(R.id.contenedor);
-            for (int i = 0; i < tiempos.size(); i++) {
-                View timerFrame = inflater.inflate(R.layout.timer, main, false);
-                TextView numberFrame = (TextView) timerFrame.findViewById(R.id.numberView);
-                TextView originalTime = (TextView) timerFrame.findViewById(R.id.originalTime);
-                numberFrame.setText(tiempos.get(i));
-                originalTime.setText(tiempos.get(i));
-                parent.addView(timerFrame);
-            }
-        }
-    }*/
-
-
-
-    /*@Override
+     /*@Override
     protected void onStop(){
 
         super.onStop();
@@ -230,6 +167,30 @@ public class MainActivity extends Activity implements SetTimer.OnDataPass{
         //}
     }*/
 
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+
+        ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
+        ArrayList<Integer> millisRemaining = new ArrayList<>();
+        for (int i = 0; i < timerContainer.getChildCount(); i++) {
+            LinearLayout timerViewParent = (LinearLayout) timerContainer.getChildAt(i);
+            for (int j = 0; j < timerViewParent.getChildCount(); j++) {
+                LinearLayout timerViewChild = (LinearLayout) timerViewParent.getChildAt(j);
+                for (int k = 0; k < timerViewChild.getChildCount(); k++) {
+                    View textView = timerViewChild.getChildAt(k);
+                    if (textView instanceof TextView) {
+                        long milliRem = MilliConversions.stringToMilli(((TextView) textView).getText().toString());
+                        millisRemaining.add((int) milliRem);
+                    }
+                }
+            }
+        }
+        Intent intent = new Intent(this, TimerCounter.class);
+        intent.putIntegerArrayListExtra("millisRemaining", millisRemaining);
+        startService(intent);
+    }
     @Override
     public void onDataPass(Timer timer) {
 

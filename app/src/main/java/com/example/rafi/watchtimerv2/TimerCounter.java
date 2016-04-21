@@ -6,34 +6,15 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class TimerCounter extends IntentService {
 
     private Handler handler;
-    private Runnable timerRun = new Runnable() {
-        @Override
-        public void run() {
-
-            TextView time = timerView.getTime();
-            String timeRemaining = MilliConversions.milliToString(millisRemaining);
-            time.setText(timeRemaining);
-            if(millisRemaining<=50)
-            {
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                timerView.resetTimerView();
-                v.vibrate(250);
-            }
-            else{
-                millisRemaining=millisRemaining-200;
-                handler.postDelayed(this, 200);
-            }
-
-
-        }
-    };
-    private long millisRemaining;
-    private TimerView timerView;
+    private ArrayList<Integer> millisRemaining;
 
     public TimerCounter() {
         super("TimerCounter");
@@ -48,8 +29,30 @@ public class TimerCounter extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        millisRemaining = intent.getIntegerArrayListExtra("millisRemaining");
+        count();
+    }
 
+    private void count(){
 
-        this.timerView =
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                for(int i=0; i<millisRemaining.size();i++){
+
+                    if(millisRemaining.get(i)<=50)
+                    {
+                        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        v.vibrate(250);
+                        Toast.makeText(getApplicationContext(),"Timer "+ i + " Complete!",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        millisRemaining.set(i,millisRemaining.get(i)-200);
+                        handler.postDelayed(this, 200);
+                    }
+                }
+            }
+        });
     }
 }
