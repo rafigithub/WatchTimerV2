@@ -1,10 +1,7 @@
 package com.example.rafi.watchtimerv2;
 
-import android.app.Activity;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +38,6 @@ public class SetTimer extends DialogFragment {
         this.message=message;
     }
 
-    private String getMessage(){
-        return this.message;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Inflate the dialog in front of the main activity
@@ -56,7 +49,7 @@ public class SetTimer extends DialogFragment {
                 setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
                 parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
                 TimerView timerView = new TimerView(getActivity(),message, parent);
-                Timer timer = new Timer(timerView, getActivity());
+                new Timer(timerView, getActivity());
                 dismiss();
             }
             public void onSwipeRight() {

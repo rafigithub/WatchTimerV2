@@ -1,11 +1,7 @@
 package com.example.rafi.watchtimerv2;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,7 +45,6 @@ public class TimerView extends LinearLayout{
         this.playButton = (ImageButton) timer.findViewById(R.id.playButton);
         this.eraseButton = (ImageButton) timer.findViewById(R.id.eraseButton);
         this.resetButton = (ImageButton) timer.findViewById(R.id.resetButton);
-        //correctTheSwipe(context);
     }
 
 
@@ -73,11 +68,6 @@ public class TimerView extends LinearLayout{
         parent.removeView(timer);
     }
 
-    public void updateTimerView(String currentTime){
-
-        time.setText(currentTime);
-    }
-
     public void resetTimerView() {
 
         time.setText(startingTime);
@@ -89,44 +79,5 @@ public class TimerView extends LinearLayout{
 
         return time;
     }
-
-    public String getStartingTime(){
-
-        return startingTime;
-    }
-
-   /* private void correctTheSwipe(Context context){
-
-        addSwipeListener(context, playButton);
-        addSwipeListener(context, resetButton);
-        addSwipeListener(context, eraseButton);
-        addSwipeListener(context, time);
-
-    }*/
-
-    /*private void addSwipeListener(final Context context, View view){
-
-        view.setOnTouchListener(new OnSwipeTouchListener(context){
-
-            Activity mainActivity = (Activity) context;
-
-            @Override
-            public void onSwipeLeft() {
-                FragmentManager fragmentManager = mainActivity.getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                SetTimer fragment = new SetTimer();
-                fragmentTransaction.add(R.id.main, fragment);
-                fragmentTransaction.commit();
-            }
-
-            @Override
-            public void onSwipeRight() {
-                //Toast.makeText(getApplication(),"funciono eh!", Toast.LENGTH_SHORT).show();
-                mainActivity.moveTaskToBack(true);
-                //finish();
-                //System.exit(0);
-            }
-        });
-    }*/
 }
 

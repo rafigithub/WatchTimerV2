@@ -29,29 +29,10 @@ package com.example.rafi.watchtimerv2;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Vibrator;
-import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 public class MainActivity extends Activity{
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +73,6 @@ public class MainActivity extends Activity{
                 Timer timer = new Timer(timerView, this);
             }
         }*/
-
         View main = findViewById(R.id.main);
         main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
 
@@ -107,36 +87,10 @@ public class MainActivity extends Activity{
 
             @Override
             public void onSwipeRight() {
-                //Toast.makeText(getApplication(),"funciono eh!", Toast.LENGTH_SHORT).show();
                 moveTaskToBack(true);
-                //finish();
-                //System.exit(0);
             }
-
-            /*@Override
-            public void onClick(){
-                Toast.makeText(getApplication(),"soy un click!", Toast.LENGTH_SHORT).show();
-            }*/
-
         });
     }
-
-    /*@Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }*/
-
-    /*@Override
-    public void onBackPressed() {
-        Toast.makeText(this,"Working",Toast.LENGTH_LONG).show();
-        moveTaskToBack(true);
-    }*/
-
     /*@Override
     protected void onStop(){
 

@@ -42,8 +42,7 @@ public class MilliConversions {
     public static String milliToString (long millis){
 
         long[] minSec = MilliConversions.milliToMinSec(millis);
-        String milliToString = String.format("%02d:%02d",minSec[0],minSec[1]);
-        return milliToString;
+        return String.format("%02d:%02d",minSec[0],minSec[1]);
     }
 
 
