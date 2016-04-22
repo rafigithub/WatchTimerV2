@@ -52,6 +52,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity{
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,13 +104,24 @@ public class MainActivity extends Activity{
                 fragmentTransaction.commit();
             }
 
-            /*public void onSwipeRight() {
-                //onStop();
-                *//*finish();
-                System.exit(0);*//*
-            }*/
+            public void onSwipeRight() {
+                //Toast.makeText(getApplication(),"funciono eh!", Toast.LENGTH_SHORT).show();
+                moveTaskToBack(true);
+                //finish();
+                //System.exit(0);
+            }
         });
     }
+
+    /*@Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }*/
 
     /*@Override
     public void onBackPressed() {

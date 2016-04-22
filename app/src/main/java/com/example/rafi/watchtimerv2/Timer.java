@@ -41,6 +41,7 @@ public class Timer {
 
                 if(play.getTag().equals("play")){
 
+                    setUpTimer();
                     startTimer();
                     play.setImageResource(R.drawable.ic_media_pause);
                     play.setTag("pause");
@@ -97,13 +98,13 @@ public class Timer {
                 System.exit(0);
             }
         });*/
-        setUpTimer();
+        //setUpTimer();
     }
 
 
     private void setUpTimer(){
 
-        final String timeString = timerView.getStartingTime();
+        final String timeString = timerView.getTime().getText().toString();
         millisRemaining = MilliConversions.stringToMilli(timeString);
 
          testTimer  = new CountDownTimer(millisRemaining, 400) {
@@ -164,9 +165,4 @@ public class Timer {
 
         return millisRemaining;
     }
-
-
-
-
-
 }
