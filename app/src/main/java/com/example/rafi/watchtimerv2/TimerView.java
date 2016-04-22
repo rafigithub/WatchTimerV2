@@ -1,5 +1,6 @@
 package com.example.rafi.watchtimerv2;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -48,6 +49,7 @@ public class TimerView extends LinearLayout{
         this.playButton = (ImageButton) timer.findViewById(R.id.playButton);
         this.eraseButton = (ImageButton) timer.findViewById(R.id.eraseButton);
         this.resetButton = (ImageButton) timer.findViewById(R.id.resetButton);
+        //correctTheSwipe(context);
     }
 
 
@@ -93,5 +95,38 @@ public class TimerView extends LinearLayout{
         return startingTime;
     }
 
+   /* private void correctTheSwipe(Context context){
+
+        addSwipeListener(context, playButton);
+        addSwipeListener(context, resetButton);
+        addSwipeListener(context, eraseButton);
+        addSwipeListener(context, time);
+
+    }*/
+
+    /*private void addSwipeListener(final Context context, View view){
+
+        view.setOnTouchListener(new OnSwipeTouchListener(context){
+
+            Activity mainActivity = (Activity) context;
+
+            @Override
+            public void onSwipeLeft() {
+                FragmentManager fragmentManager = mainActivity.getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                SetTimer fragment = new SetTimer();
+                fragmentTransaction.add(R.id.main, fragment);
+                fragmentTransaction.commit();
+            }
+
+            @Override
+            public void onSwipeRight() {
+                //Toast.makeText(getApplication(),"funciono eh!", Toast.LENGTH_SHORT).show();
+                mainActivity.moveTaskToBack(true);
+                //finish();
+                //System.exit(0);
+            }
+        });
+    }*/
 }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -124,7 +125,13 @@ public class Timer {
                 Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
                 timerView.resetTimerView();
                 v.vibrate(250);
-                Toast.makeText(context,"finish countdowntimer",Toast.LENGTH_SHORT).show();
+
+                Intent intentHome = new Intent(context, MainActivity.class);
+                intentHome.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intentHome.putExtra("Default extra","");
+                context.startActivity(intentHome);
+                //Toast.makeText(context,"finish countdowntimer",Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -157,7 +164,10 @@ public class Timer {
 
     private void cancelTimer(){
 
-        testTimer.cancel();
+        if(testTimer!=null){
+
+            testTimer.cancel();
+        }
         //handler.removeCallbacks(timerRun);
     }
 

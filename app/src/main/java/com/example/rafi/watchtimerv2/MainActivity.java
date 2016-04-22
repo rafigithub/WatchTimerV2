@@ -104,6 +104,7 @@ public class MainActivity extends Activity{
                 fragmentTransaction.commit();
             }
 
+            @Override
             public void onSwipeRight() {
                 //Toast.makeText(getApplication(),"funciono eh!", Toast.LENGTH_SHORT).show();
                 moveTaskToBack(true);
