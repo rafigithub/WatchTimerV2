@@ -30,13 +30,27 @@ public class Timer {
     public Timer(final TimerView timerView, final Context context){
 
         this.context = context;
+        final Activity mainActivity = (Activity) context;
         //setTimerView(timerView);
         this.timerView = timerView;
         //Set the listener and event handler for pressing the play button
         ImageButton playButton = timerView.getPlayButton();
-        playButton.setOnClickListener(new View.OnClickListener() {
+
+        playButton.setOnTouchListener(new OnSwipeTouchListener(mainActivity, playButton) {
             @Override
-            public void onClick(View v) {
+            public void onSwipeLeft() {
+                FragmentManager fragmentManager = mainActivity.getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                SetTimer fragment = new SetTimer();
+                fragmentTransaction.add(R.id.main, fragment);
+                fragmentTransaction.commit();
+            }
+            @Override
+            public void onSwipeRight() {
+                mainActivity.moveTaskToBack(true);
+            }
+            @Override
+            public void onClick(View v){
 
                 ImageButton play = (ImageButton) v;
 
@@ -57,11 +71,67 @@ public class Timer {
             }
         });
 
-        //Set the listener and event handler for the reset button
-        ImageButton resetButton = timerView.getResetButton();
-        resetButton.setOnClickListener(new View.OnClickListener() {
+       /* playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                ImageButton play = (ImageButton) v;
+
+                if(play.getTag().equals("play")){
+
+                    setUpTimer();
+                    startTimer();
+                    play.setImageResource(R.drawable.ic_media_pause);
+                    play.setTag("pause");
+                }
+
+                else if(play.getTag().equals("pause")){
+
+                    cancelTimer();
+                    play.setImageResource(R.drawable.ic_media_play);
+                    play.setTag("play");
+                }
+            }
+        });*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Set the listener and event handler for the reset button
+        ImageButton resetButton = timerView.getResetButton();
+
+        resetButton.setOnTouchListener(new OnSwipeTouchListener(mainActivity, resetButton) {
+            @Override
+            public void onSwipeLeft() {
+                FragmentManager fragmentManager = mainActivity.getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                SetTimer fragment = new SetTimer();
+                fragmentTransaction.add(R.id.main, fragment);
+                fragmentTransaction.commit();
+            }
+            @Override
+            public void onSwipeRight() {
+                mainActivity.moveTaskToBack(true);
+            }
+            @Override
+            public void onClick(View v){
 
                 cancelTimer();
                 setUpTimer();
@@ -69,36 +139,53 @@ public class Timer {
             }
         });
 
-        //Set the listener and event handler for the erase button
-        ImageButton eraseButton = timerView.getEraseButton();
-        eraseButton.setOnClickListener(new View.OnClickListener() {
+        /*resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                cancelTimer();
+                setUpTimer();
+                timerView.resetTimerView();
+            }
+        });*/
+
+        //Set the listener and event handler for the erase button
+        ImageButton eraseButton = timerView.getEraseButton();
+
+        eraseButton.setOnTouchListener(new OnSwipeTouchListener(mainActivity, eraseButton) {
+            @Override
+            public void onSwipeLeft() {
+                FragmentManager fragmentManager = mainActivity.getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                SetTimer fragment = new SetTimer();
+                fragmentTransaction.add(R.id.main, fragment);
+                fragmentTransaction.commit();
+            }
+            @Override
+            public void onSwipeRight() {
+                mainActivity.moveTaskToBack(true);
+            }
+            @Override
+            public void onClick(View v){
 
                 cancelTimer();
                 timerView.removeTimerView();
             }
         });
 
-        /*timerView.setOnTouchListener(new OnSwipeTouchListener(context) {
+
+
+
+       /* eraseButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSwipeLeft() {
+            public void onClick(View v) {
 
-                final Activity activity = (Activity) context;
-                FragmentManager fragmentManager = activity.getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                SetTimer fragment = new SetTimer();
-                fragmentTransaction.add(R.id.main, fragment);
-                fragmentTransaction.commit();
-            }
-
-            public void onSwipeRight() {
-
-                final Activity activity = (Activity) context;
-                activity.finish();
-                System.exit(0);
+                cancelTimer();
+                timerView.removeTimerView();
             }
         });*/
+
+
         //setUpTimer();
     }
 
@@ -158,7 +245,6 @@ public class Timer {
 
     public void startTimer(){
 
-        //handler.post(timerRun);
         testTimer.start();
     }
 
@@ -168,7 +254,6 @@ public class Timer {
 
             testTimer.cancel();
         }
-        //handler.removeCallbacks(timerRun);
     }
 
     public long getMillisRemaining(){

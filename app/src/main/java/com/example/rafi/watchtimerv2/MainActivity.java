@@ -95,6 +95,7 @@ public class MainActivity extends Activity{
 
         View main = findViewById(R.id.main);
         main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+
             @Override
             public void onSwipeLeft() {
                 FragmentManager fragmentManager = getFragmentManager();
@@ -111,6 +112,12 @@ public class MainActivity extends Activity{
                 //finish();
                 //System.exit(0);
             }
+
+            /*@Override
+            public void onClick(){
+                Toast.makeText(getApplication(),"soy un click!", Toast.LENGTH_SHORT).show();
+            }*/
+
         });
     }
 
