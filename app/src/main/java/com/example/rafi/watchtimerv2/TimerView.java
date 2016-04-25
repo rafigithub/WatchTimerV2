@@ -16,8 +16,6 @@ public class TimerView extends LinearLayout{
 
     //Create a Linear Layout that will contain the template from "timer.xml".
     private LinearLayout timer;
-    //Create a Linear Layout that will contain the timer's parent.
-    private LinearLayout parent;
     //And variables to store the timers' buttons and displays.
     private ImageButton playButton;
     private ImageButton resetButton;
@@ -35,7 +33,6 @@ public class TimerView extends LinearLayout{
         //Inflate the template into the timer layout and attach it to parent
         this.timer = (LinearLayout) inflater.inflate(R.layout.timer,parent,false);
         parent.addView(timer);
-        this.parent = parent;
         //Then set the timer to the initial time
         this.time = (TextView) timer.findViewById(R.id.numberView);
         time.setText(startingTime);
@@ -65,7 +62,7 @@ public class TimerView extends LinearLayout{
 
     public void removeTimerView(){
 
-        parent.removeView(timer);
+        ((LinearLayout)timer.getParent()).removeView(timer);
     }
 
     public void resetTimerView() {

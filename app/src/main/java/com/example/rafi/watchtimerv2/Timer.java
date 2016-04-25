@@ -116,7 +116,7 @@ public class Timer {
     }
 
 
-    private void setUpTimer(){
+    public void setUpTimer(){
 
         final String timeString = timerView.getTime().getText().toString();
         long millisRemaining = MilliConversions.stringToMilli(timeString);
@@ -153,11 +153,16 @@ public class Timer {
         testTimer.start();
     }
 
-    private void cancelTimer(){
+    public void cancelTimer(){
 
         if(testTimer!=null){
 
             testTimer.cancel();
         }
+    }
+
+    public TimerView getTimerView(){
+
+        return timerView;
     }
 }

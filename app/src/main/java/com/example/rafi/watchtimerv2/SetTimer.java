@@ -49,7 +49,8 @@ public class SetTimer extends DialogFragment {
                 setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
                 parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
                 TimerView timerView = new TimerView(getActivity(),message, parent);
-                new Timer(timerView, getActivity());
+                Timer timer = new Timer(timerView, getActivity());
+                ((MainActivity)getActivity()).addTimer(timer);
                 dismiss();
             }
             public void onSwipeRight() {

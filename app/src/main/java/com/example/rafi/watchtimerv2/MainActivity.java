@@ -29,34 +29,47 @@ package com.example.rafi.watchtimerv2;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class MainActivity extends Activity{
+
+    private ArrayList<Timer> timers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        long timeLeaving=0;
-        ArrayList<Long> millisRemaining = new ArrayList<>();
-        Map<String, ?> results = sharedPref.getAll();
-        if(sharedPref.contains("timeLeaving")){
+        //SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 
-            timeLeaving = sharedPref.getLong("timeLeaving", 0);
-        }
-
-        if(sharedPref.contains("times")){
+        /*if(sharedPref.contains("times")){
 
             Gson gson = new Gson();
             String json = sharedPref.getString("times", null);
             Type type = new TypeToken<ArrayList<Timer>>() {
             }.getType();
-            allTimers = gson.fromJson(json, type);
-        }
+            timers = gson.fromJson(json, type);
 
-        LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
+            for(Timer timer: timers){
+
+                timer.getTimerView().resetTimerView();
+                timer.setUpTimer();
+            }
+        }*/
+
+
+        /*LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
         long currentTime = System.currentTimeMillis();
         long timeAbsent = currentTime - timeLeaving;
         for(Long millis: millisRemaining){
@@ -87,19 +100,31 @@ public class MainActivity extends Activity{
 
             @Override
             public void onSwipeRight() {
+
+                for(Timer timer: timers){
+                    if(timer.getTimerView().getPlayButton().getTag().equals("pause")){
+                        onDestroy();
+                    }
+                }
                 moveTaskToBack(true);
             }
         });
     }
-    /*@Override
-    protected void onStop(){
 
-        super.onStop();
-        //SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = sharedPref.edit();
-        //editor.clear();
-        //editor.apply();
-        *//*ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
+    public void addTimer(Timer timer){
+
+        timers.add(timer);
+    }
+
+    /*@Override
+    protected void onDestroy(){
+
+        super.onDestroy();
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
+        editor.apply();
+        ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
         ArrayList<Long> millisRemaining = new ArrayList<>();
         for (int i=0; i<timerContainer.getChildCount();i++){
             LinearLayout timerViewParent =(LinearLayout) timerContainer.getChildAt(i);
@@ -112,16 +137,12 @@ public class MainActivity extends Activity{
                         millisRemaining.add(milliRem);
                     }
                 }
-            }*//*
-            *//*Gson gson = new Gson();
+            }
+            Gson gson = new Gson();
             Type type = new TypeToken<ArrayList<Timer>>(){}.getType();
-            String json = gson.toJson(allTimers, type);
+            String json = gson.toJson(timers, type);
             editor.putString("times", json);
-            //editor.apply();
-            long timeLeaving = System.currentTimeMillis();
-            editor.putLong("timeLeaving", timeLeaving);
-            editor.apply();*//*
-        //}
+            editor.apply();
     }*/
 }
 
