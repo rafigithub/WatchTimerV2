@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -28,6 +29,7 @@ public class TimerView extends LinearLayout{
     private ImageButton resetButton;
     private ImageButton eraseButton;
     private TextView timeText;
+    //private int posInArray=-1;
 
     //The constructor takes an initial time and a parent to attach the timer to.
     public TimerView(final Context context, final Timer timer, ViewGroup parent){
@@ -122,6 +124,15 @@ public class TimerView extends LinearLayout{
 
                 timer.cancelTimer();
                 removeTimerView();
+                int posInArray = mainActivity.getTimerArray().indexOf(TimerView.this);
+                if(posInArray!=-1){
+                    //Toast.makeText(mainActivity, "element no"+ posInArray+".", Toast.LENGTH_SHORT).show();
+                    mainActivity.getTimerArray().remove(posInArray);
+
+                }
+                else{
+                    Toast.makeText(mainActivity, "element not in array", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -136,6 +147,16 @@ public class TimerView extends LinearLayout{
         timeText.setText(timer.getStartingTime());
         playButton.setImageResource(R.drawable.ic_media_play);
         playButton.setTag("play");
+    }
+
+    /*public void setPosInArray(int pos){
+
+        posInArray = pos;
+    }*/
+
+    public LinearLayout getTimerContainer(){
+
+        return timerContainer;
     }
 }
 

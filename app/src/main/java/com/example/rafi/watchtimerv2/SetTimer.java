@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
+import java.util.ArrayList;
+
 /**
  * Created by Rafi on 20/02/2016.
  */
@@ -144,5 +146,7 @@ public class SetTimer extends DialogFragment {
         parent = (LinearLayout) mainActivity.findViewById(R.id.contenedor);
         Timer timer = new Countdown(mainActivity, message);
         TimerView timerView = new TimerView(mainActivity, timer, parent);
+        mainActivity.getTimerArray().add(timerView);
+        //timerView.setPosInArray(mainActivity.getTimerArray().size()-1);
     }
 }

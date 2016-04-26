@@ -31,11 +31,13 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +49,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends WearableActivity{
 
-    //private ArrayList<Timer> timers = new ArrayList<>();
+    private ArrayList<TimerView> timers = new ArrayList<>();
     //boolean timersRunning = false;
 
     @Override
@@ -106,6 +108,47 @@ public class MainActivity extends WearableActivity{
         });
     }
 
+    @Override
+    public void onEnterAmbient(Bundle ambientDetails){
+
+        super.onEnterAmbient(ambientDetails);
+
+        RelativeLayout main = (RelativeLayout)findViewById(R.id.main);
+        main.setBackgroundColor(Color.BLACK);
+        if(timers.size()!=0){
+
+            for(TimerView timerView: timers){
+                LinearLayout container = timerView.getTimerContainer();
+                LinearLayout border = (LinearLayout) container.findViewById(R.id.hijo);
+                border.setBackgroundColor(Color.WHITE);
+                for (int i=0;i<border.getChildCount();i++){
+                    border.getChildAt(i).setBackgroundColor(Color.BLACK);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onExitAmbient(){
+
+        super.onExitAmbient();
+
+        RelativeLayout main = (RelativeLayout) findViewById(R.id.main);
+        main.setBackgroundColor(Color.parseColor("#303F9F"));
+
+        if(timers.size()!=0){
+
+            for(TimerView timerView: timers){
+                LinearLayout container = timerView.getTimerContainer();
+                LinearLayout border = (LinearLayout) container.findViewById(R.id.hijo);
+                border.setBackgroundColor(Color.BLACK);
+                for (int i=0;i<border.getChildCount();i++){
+                    border.getChildAt(i).setBackgroundColor(Color.parseColor("#303F9F"));
+                }
+            }
+        }
+    }
+
     public void setTimerFragment(){
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -115,10 +158,10 @@ public class MainActivity extends WearableActivity{
         fragmentTransaction.commit();
     }
 
-   /* public void addTimer(Timer timer){
+    public ArrayList<TimerView> getTimerArray(){
 
-        timers.add(timer);
-    }*/
+        return timers;
+    }
 
    /* public void saveData(){
 
