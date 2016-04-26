@@ -50,8 +50,7 @@ public class Countdown implements Timer {
             public void onFinish() {
 
                 Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                v.vibrate(250);
-                Toast.makeText(context,"termine",Toast.LENGTH_SHORT).show();
+                v.vibrate(300);
                 Intent intentHome = new Intent(context, MainActivity.class);
                 intentHome.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

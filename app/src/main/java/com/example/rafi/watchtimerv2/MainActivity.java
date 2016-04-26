@@ -32,6 +32,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.wearable.activity.WearableActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -44,7 +45,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class MainActivity extends Activity{
+public class MainActivity extends WearableActivity{
 
     //private ArrayList<Timer> timers = new ArrayList<>();
     //boolean timersRunning = false;
@@ -53,6 +54,7 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setAmbientEnabled();
 
        /* SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 
