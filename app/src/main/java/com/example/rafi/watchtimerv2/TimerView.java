@@ -1,7 +1,10 @@
 package com.example.rafi.watchtimerv2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,67 +17,126 @@ import android.widget.TextView;
 //Class that creates a graphical interface for a timer.
 public class TimerView extends LinearLayout{
 
+    //Get a reference to the main activity
+    private MainActivity mainActivity;
+    //Get a reference to the type of timer this view implements.
+    private Timer timer;
     //Create a Linear Layout that will contain the template from "timer.xml".
-    private LinearLayout timer;
+    private LinearLayout timerContainer;
     //And variables to store the timers' buttons and displays.
     private ImageButton playButton;
     private ImageButton resetButton;
     private ImageButton eraseButton;
-    private TextView time;
+    private TextView timeText;
     //Finally, a variable to store the starting time for the timer.
-    private String startingTime;
 
     //The constructor takes an initial time and a parent to attach the timer to.
-    public TimerView(final Context context, String startingTime, LinearLayout parent){
+    public TimerView(final Context context, final Timer timer, ViewGroup parent){
 
         //Get the context
         super(context);
+        this.mainActivity = (MainActivity) context;
         LayoutInflater inflater = LayoutInflater.from(context);
         //Inflate the template into the timer layout and attach it to parent
-        this.timer = (LinearLayout) inflater.inflate(R.layout.timer,parent,false);
-        parent.addView(timer);
+        this.timerContainer = (LinearLayout) inflater.inflate(R.layout.timer,parent,false);
+        parent.addView(timerContainer);
+        //Set the timer to the type desired
+        this.timer = timer;
         //Then set the timer to the initial time
-        this.time = (TextView) timer.findViewById(R.id.numberView);
-        time.setText(startingTime);
-        //And set the starting time variable as well
-        this.startingTime = startingTime;
+        this.timeText = (TextView) timerContainer.findViewById(R.id.numberView);
+        timeText.setText(timer.getStartingTime());
         //Set the buttons of the template to this object button variables
-        this.playButton = (ImageButton) timer.findViewById(R.id.playButton);
-        this.eraseButton = (ImageButton) timer.findViewById(R.id.eraseButton);
-        this.resetButton = (ImageButton) timer.findViewById(R.id.resetButton);
+        this.playButton = (ImageButton) timerContainer.findViewById(R.id.playButton);
+        this.eraseButton = (ImageButton) timerContainer.findViewById(R.id.eraseButton);
+        this.resetButton = (ImageButton) timerContainer.findViewById(R.id.resetButton);
+
+
+        playButton.setOnTouchListener(new OnSwipeTouchListener(mainActivity, playButton){
+
+            @Override
+            public void onSwipeLeft() {
+                mainActivity.setTimerFragment();
+            }
+
+            @Override
+            public void onSwipeRight() {
+                mainActivity.moveTaskToBack(true);
+            }
+
+            public void onClick(View v){
+
+                ImageButton play = (ImageButton) v;
+
+                if(!timeText.getText().toString().equals("00:00")){
+
+                    if(play.getTag().equals("play")){
+
+                        timer.setUpTimer(timeText);
+                        timer.startTimer();
+                        play.setImageResource(R.drawable.ic_media_pause);
+                        play.setTag("pause");
+                    }
+
+                    else if(play.getTag().equals("pause")){
+
+                        timer.cancelTimer();
+                        play.setImageResource(R.drawable.ic_media_play);
+                        play.setTag("play");
+                    }
+                }
+            }
+        });
+
+        resetButton.setOnTouchListener(new OnSwipeTouchListener(mainActivity, resetButton){
+
+            @Override
+            public void onSwipeLeft() {
+                mainActivity.setTimerFragment();
+            }
+
+            @Override
+            public void onSwipeRight() {
+                mainActivity.moveTaskToBack(true);
+            }
+
+            public void onClick(View v){
+
+                timer.cancelTimer();
+                timer.setUpTimer(timeText);
+                resetTimerView();
+            }
+        });
+
+        eraseButton.setOnTouchListener(new OnSwipeTouchListener(mainActivity, eraseButton){
+
+            @Override
+            public void onSwipeLeft() {
+                mainActivity.setTimerFragment();
+            }
+
+            @Override
+            public void onSwipeRight() {
+                mainActivity.moveTaskToBack(true);
+            }
+
+            public void onClick(View v){
+
+                timer.cancelTimer();
+                resetTimerView();
+            }
+        });
     }
 
+    /*public void removeTimerView(){
 
-    public ImageButton getPlayButton(){
-
-        return playButton;
-    }
-    public ImageButton getResetButton(){
-
-        return resetButton;
-    }
-    public ImageButton getEraseButton(){
-
-        return eraseButton;
-    }
-
-
-
-    public void removeTimerView(){
-
-        ((LinearLayout)timer.getParent()).removeView(timer);
-    }
+        ((LinearLayout)timerContainer.getParent()).removeView(timerContainer);
+    }*/
 
     public void resetTimerView() {
 
-        time.setText(startingTime);
+        timeText.setText(timer.getStartingTime());
         playButton.setImageResource(R.drawable.ic_media_play);
         playButton.setTag("play");
-    }
-
-     public TextView getTime(){
-
-        return time;
     }
 }
 

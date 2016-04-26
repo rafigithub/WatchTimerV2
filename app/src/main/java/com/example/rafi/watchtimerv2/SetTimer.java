@@ -48,9 +48,9 @@ public class SetTimer extends DialogFragment {
             public void onSwipeLeft() {
                 setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
                 parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
-                TimerView timerView = new TimerView(getActivity(),message, parent);
-                Timer timer = new Timer(timerView, getActivity());
-                ((MainActivity)getActivity()).addTimer(timer);
+                Timer timer = new Countdown(getActivity(), message);
+                TimerView timerView = new TimerView(getActivity(), timer, parent);
+                //((MainActivity)getActivity()).addTimer(timer);
                 dismiss();
             }
             public void onSwipeRight() {
@@ -81,8 +81,8 @@ public class SetTimer extends DialogFragment {
             public void onSwipeLeft() {
                 setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
                 parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
-                TimerView timerView = new TimerView(getActivity(),message, parent);
-                Timer timer = new Timer(timerView, getActivity());
+                Timer timer = new Countdown(getActivity(), message);
+                TimerView timerView = new TimerView(getActivity(), timer, parent);
                 dismiss();
             }
             public void onSwipeRight() {
@@ -95,8 +95,8 @@ public class SetTimer extends DialogFragment {
             public void onSwipeLeft() {
                 setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
                 parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
-                TimerView timerView = new TimerView(getActivity(),message, parent);
-                Timer timer = new Timer(timerView, getActivity());
+                Timer timer = new Countdown(getActivity(), message);
+                TimerView timerView = new TimerView(getActivity(), timer, parent);
                 dismiss();
             }
             public void onSwipeRight() {

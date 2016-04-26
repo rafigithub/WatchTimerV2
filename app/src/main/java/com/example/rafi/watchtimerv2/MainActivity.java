@@ -78,11 +78,8 @@ public class MainActivity extends Activity{
 
             @Override
             public void onSwipeLeft() {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                SetTimer fragment = new SetTimer();
-                fragmentTransaction.add(R.id.main, fragment);
-                fragmentTransaction.commit();
+
+                setTimerFragment();
             }
 
             @Override
@@ -105,6 +102,15 @@ public class MainActivity extends Activity{
                 }*/
             }
         });
+    }
+
+    public void setTimerFragment(){
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        SetTimer fragment = new SetTimer();
+        fragmentTransaction.add(R.id.main, fragment);
+        fragmentTransaction.commit();
     }
 
    /* public void addTimer(Timer timer){
