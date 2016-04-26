@@ -147,6 +147,5 @@ public class SetTimer extends DialogFragment {
         Timer timer = new Countdown(mainActivity, message);
         TimerView timerView = new TimerView(mainActivity, timer, parent);
         mainActivity.getTimerArray().add(timerView);
-        //timerView.setPosInArray(mainActivity.getTimerArray().size()-1);
     }
 }

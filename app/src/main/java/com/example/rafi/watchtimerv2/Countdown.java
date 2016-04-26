@@ -17,15 +17,14 @@ import android.widget.Toast;
  */
 public class Countdown implements Timer {
 
-    private Context context;
+    private MainActivity mainActivity;
     private CountDownTimer testTimer;
     private String startingTime;
 
 
     public Countdown(final Context context, String startingTime){
 
-        this.context = context;
-        //final Activity mainActivity = (Activity) context;
+        mainActivity = (MainActivity) context;
         this.startingTime = startingTime;
         //setTimerView(timerView);
 
@@ -49,13 +48,13 @@ public class Countdown implements Timer {
             @Override
             public void onFinish() {
 
-                Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                Vibrator v = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(300);
-                Intent intentHome = new Intent(context, MainActivity.class);
+                Intent intentHome = new Intent(mainActivity, MainActivity.class);
                 intentHome.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intentHome.putExtra("Default extra","");
-                context.startActivity(intentHome);
+                mainActivity.startActivity(intentHome);
             }
         };
     }

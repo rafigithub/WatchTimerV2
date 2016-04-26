@@ -33,9 +33,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.wearable.activity.WearableActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -49,6 +51,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends WearableActivity{
 
+    private PowerManager powerManager;
+    private PowerManager.WakeLock wakeLock;
     private ArrayList<TimerView> timers = new ArrayList<>();
     //boolean timersRunning = false;
 
@@ -57,6 +61,9 @@ public class MainActivity extends WearableActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setAmbientEnabled();
+
+        powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "awake");
 
        /* SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 
@@ -89,7 +96,8 @@ public class MainActivity extends WearableActivity{
             @Override
             public void onSwipeRight() {
 
-                moveTaskToBack(true);
+                finish();
+                //moveTaskToBack(true);
                 /*for(Timer timer: timers){
                     if(timer.getTimerView().getPlayButton().getTag().equals("pause")){
                         timersRunning = true;
@@ -113,6 +121,11 @@ public class MainActivity extends WearableActivity{
 
         super.onEnterAmbient(ambientDetails);
 
+        if(areTimersRunning()){
+
+            wakeLock.acquire();
+        }
+
         RelativeLayout main = (RelativeLayout)findViewById(R.id.main);
         main.setBackgroundColor(Color.BLACK);
         if(timers.size()!=0){
@@ -132,6 +145,7 @@ public class MainActivity extends WearableActivity{
     public void onExitAmbient(){
 
         super.onExitAmbient();
+        wakeLock.release();
 
         RelativeLayout main = (RelativeLayout) findViewById(R.id.main);
         main.setBackgroundColor(Color.parseColor("#303F9F"));
@@ -162,6 +176,24 @@ public class MainActivity extends WearableActivity{
 
         return timers;
     }
+
+    private boolean areTimersRunning(){
+
+        boolean isRunning=false;
+
+        if (timers.size()>0){
+
+            for(TimerView timerView: timers){
+
+                ImageButton playButton = (ImageButton)timerView.getTimerContainer().findViewById(R.id.playButton);
+                if(playButton.getTag().equals("pause")){
+                    isRunning = true;
+                }
+            }
+        }
+        return isRunning;
+    }
+
 
    /* public void saveData(){
 

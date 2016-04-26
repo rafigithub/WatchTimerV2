@@ -29,7 +29,6 @@ public class TimerView extends LinearLayout{
     private ImageButton resetButton;
     private ImageButton eraseButton;
     private TextView timeText;
-    //private int posInArray=-1;
 
     //The constructor takes an initial time and a parent to attach the timer to.
     public TimerView(final Context context, final Timer timer, ViewGroup parent){
@@ -148,11 +147,6 @@ public class TimerView extends LinearLayout{
         playButton.setImageResource(R.drawable.ic_media_play);
         playButton.setTag("play");
     }
-
-    /*public void setPosInArray(int pos){
-
-        posInArray = pos;
-    }*/
 
     public LinearLayout getTimerContainer(){
 
