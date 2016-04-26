@@ -145,7 +145,11 @@ public class MainActivity extends WearableActivity{
     public void onExitAmbient(){
 
         super.onExitAmbient();
-        wakeLock.release();
+
+        if(wakeLock.isHeld()){
+
+            wakeLock.release();
+        }
 
         RelativeLayout main = (RelativeLayout) findViewById(R.id.main);
         main.setBackgroundColor(Color.parseColor("#303F9F"));
