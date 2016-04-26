@@ -36,6 +36,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -45,47 +46,33 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity{
 
-    private ArrayList<Timer> timers = new ArrayList<>();
+    //private ArrayList<Timer> timers = new ArrayList<>();
+    //boolean timersRunning = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 
-        /*if(sharedPref.contains("times")){
+       /* SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+
+        if(sharedPref.contains("times")){
 
             Gson gson = new Gson();
             String json = sharedPref.getString("times", null);
-            Type type = new TypeToken<ArrayList<Timer>>() {
+            Type type = new TypeToken<ArrayList<String>>() {
             }.getType();
-            timers = gson.fromJson(json, type);
+            ArrayList<String> timeWhenLeaving = new ArrayList<>();
+            timeWhenLeaving = gson.fromJson(json, type);
+            for(String times:timeWhenLeaving){
 
-            for(Timer timer: timers){
-
-                timer.getTimerView().resetTimerView();
-                timer.setUpTimer();
+                TimerView timerView = new TimerView(this,times, (LinearLayout)findViewById(R.id.contenedor));
+                Timer timer = new Timer(timerView, this);
+                timers.add(timer);
             }
+            //Toast.makeText(this,json,Toast.LENGTH_SHORT).show();
         }*/
 
-
-        /*LinearLayout timerContainer = (LinearLayout) findViewById(R.id.contenedor);
-        long currentTime = System.currentTimeMillis();
-        long timeAbsent = currentTime - timeLeaving;
-        for(Long millis: millisRemaining){
-
-            long millisLong = millis.longValue();
-            if(millisLong-timeAbsent>0){
-
-                String message = MilliConversions.milliToString(millisLong-timeAbsent);
-                TimerView timerView = new TimerView(this,message, timerContainer);
-                Timer timer = new Timer(timerView, this);
-                timer.startTimer();
-            }else{
-                TimerView timerView = new TimerView(this, "00:00", timerContainer);
-                Timer timer = new Timer(timerView, this);
-            }
-        }*/
         View main = findViewById(R.id.main);
         main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
 
@@ -101,48 +88,48 @@ public class MainActivity extends Activity{
             @Override
             public void onSwipeRight() {
 
-                for(Timer timer: timers){
+                moveTaskToBack(true);
+                /*for(Timer timer: timers){
                     if(timer.getTimerView().getPlayButton().getTag().equals("pause")){
-                        onDestroy();
+                        timersRunning = true;
                     }
                 }
-                moveTaskToBack(true);
+                if(timersRunning){
+                    moveTaskToBack(true);
+                    timersRunning = false;
+                }
+                else{
+                    timersRunning = false;
+                    saveData();
+                    finish();
+                }*/
             }
         });
     }
 
-    public void addTimer(Timer timer){
+   /* public void addTimer(Timer timer){
 
         timers.add(timer);
-    }
+    }*/
 
-    /*@Override
-    protected void onDestroy(){
+   /* public void saveData(){
 
-        super.onDestroy();
+        ArrayList<String> timeWhenLeaving = new ArrayList<>();
+
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.clear();
+
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<String>>(){}.getType();
+
+        for(Timer timer: timers){
+
+            timeWhenLeaving.add(timer.getTimerView().getTime().getText().toString());
+        }
+        String json = gson.toJson(timeWhenLeaving, type);
+        //String json = "Probando la guardada";
+        editor.putString("times", json);
         editor.apply();
-        ViewGroup timerContainer = (ViewGroup) findViewById(R.id.contenedor);
-        ArrayList<Long> millisRemaining = new ArrayList<>();
-        for (int i=0; i<timerContainer.getChildCount();i++){
-            LinearLayout timerViewParent =(LinearLayout) timerContainer.getChildAt(i);
-            for (int j=0; j<timerViewParent.getChildCount();j++){
-                LinearLayout timerViewChild = (LinearLayout) timerViewParent.getChildAt(j);
-                for (int k=0; k<timerViewChild.getChildCount();k++){
-                    View textView = timerViewChild.getChildAt(k);
-                    if (textView instanceof TextView){
-                        long milliRem = MilliConversions.stringToMilli(((TextView) textView).getText().toString());
-                        millisRemaining.add(milliRem);
-                    }
-                }
-            }
-            Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<Timer>>(){}.getType();
-            String json = gson.toJson(timers, type);
-            editor.putString("times", json);
-            editor.apply();
     }*/
 }
 
