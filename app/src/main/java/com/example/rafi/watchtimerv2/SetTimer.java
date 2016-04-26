@@ -46,11 +46,7 @@ public class SetTimer extends DialogFragment {
         vista.setOnTouchListener(new OnSwipeTouchListener(getActivity().getApplicationContext()) {
             @Override
             public void onSwipeLeft() {
-                setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
-                parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
-                Timer timer = new Countdown(getActivity(), message);
-                TimerView timerView = new TimerView(getActivity(), timer, parent);
-                //((MainActivity)getActivity()).addTimer(timer);
+                createTimer();
                 dismiss();
             }
             public void onSwipeRight() {
@@ -79,10 +75,7 @@ public class SetTimer extends DialogFragment {
         mMinutePicker.setOnTouchListener(new OnSwipeTouchListener(getActivity().getApplicationContext()) {
             @Override
             public void onSwipeLeft() {
-                setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
-                parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
-                Timer timer = new Countdown(getActivity(), message);
-                TimerView timerView = new TimerView(getActivity(), timer, parent);
+                createTimer();
                 dismiss();
             }
             public void onSwipeRight() {
@@ -93,10 +86,7 @@ public class SetTimer extends DialogFragment {
         mSecondPicker.setOnTouchListener(new OnSwipeTouchListener(getActivity().getApplicationContext()) {
             @Override
             public void onSwipeLeft() {
-                setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
-                parent = (LinearLayout) getActivity().findViewById(R.id.contenedor);
-                Timer timer = new Countdown(getActivity(), message);
-                TimerView timerView = new TimerView(getActivity(), timer, parent);
+                createTimer();
                 dismiss();
             }
             public void onSwipeRight() {
@@ -145,5 +135,14 @@ public class SetTimer extends DialogFragment {
                 return String.format("%02d", value);
             }
         });
+    }
+
+    private void createTimer(){
+
+        MainActivity mainActivity = (MainActivity)getActivity();
+        setMessage(String.format("%02d:%02d",getMinutePicker(),getSecondPicker()));
+        parent = (LinearLayout) mainActivity.findViewById(R.id.contenedor);
+        Timer timer = new Countdown(mainActivity, message);
+        TimerView timerView = new TimerView(mainActivity, timer, parent);
     }
 }

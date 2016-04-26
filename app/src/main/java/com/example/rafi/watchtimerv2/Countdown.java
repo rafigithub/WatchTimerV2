@@ -10,6 +10,7 @@ import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Rafi on 26/04/2016.
@@ -24,7 +25,7 @@ public class Countdown implements Timer {
     public Countdown(final Context context, String startingTime){
 
         this.context = context;
-        final Activity mainActivity = (Activity) context;
+        //final Activity mainActivity = (Activity) context;
         this.startingTime = startingTime;
         //setTimerView(timerView);
 
@@ -50,7 +51,7 @@ public class Countdown implements Timer {
 
                 Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(250);
-
+                Toast.makeText(context,"termine",Toast.LENGTH_SHORT).show();
                 Intent intentHome = new Intent(context, MainActivity.class);
                 intentHome.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

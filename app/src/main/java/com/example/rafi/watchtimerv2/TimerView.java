@@ -28,7 +28,6 @@ public class TimerView extends LinearLayout{
     private ImageButton resetButton;
     private ImageButton eraseButton;
     private TextView timeText;
-    //Finally, a variable to store the starting time for the timer.
 
     //The constructor takes an initial time and a parent to attach the timer to.
     public TimerView(final Context context, final Timer timer, ViewGroup parent){
@@ -122,15 +121,15 @@ public class TimerView extends LinearLayout{
             public void onClick(View v){
 
                 timer.cancelTimer();
-                resetTimerView();
+                removeTimerView();
             }
         });
     }
 
-    /*public void removeTimerView(){
+    public void removeTimerView(){
 
         ((LinearLayout)timerContainer.getParent()).removeView(timerContainer);
-    }*/
+    }
 
     public void resetTimerView() {
 
