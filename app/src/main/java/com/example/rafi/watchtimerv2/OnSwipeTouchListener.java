@@ -8,15 +8,15 @@ import android.view.View;
 /**
  * Created by Rafi on 20/02/2016.
  */
-public class OnSwipeTouchListener implements View.OnTouchListener {//CREA UNA CLASE NUEVA QUE IMPLEMENTA ONTOUCHLISTENER
-    private final GestureDetector gestureDetector;  //DECLARA OBJETO DE TIPO GESTUREDETECTOR
+public class OnSwipeTouchListener implements View.OnTouchListener {
+    private final GestureDetector gestureDetector;
     private View view;
-    public OnSwipeTouchListener(Context context, View v) {      //CONSTRUCTOR overloaded con view
+    public OnSwipeTouchListener(Context context, View v) {
         this.view = v;
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 
-    public OnSwipeTouchListener(Context context) {      //CONSTRUCTOR overloaded 2
+    public OnSwipeTouchListener(Context context) {
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 
@@ -30,7 +30,7 @@ public class OnSwipeTouchListener implements View.OnTouchListener {//CREA UNA CL
     public void onClick(View view){
 
     }
-    public boolean onTouch(View v, MotionEvent event) {//METODO REQUERIDO AL IMPLEMENTAR ONTOUCHLISTENER
+    public boolean onTouch(View v, MotionEvent event) {
         return gestureDetector.onTouchEvent(event);
     }
     private final class GestureListener extends GestureDetector.SimpleOnGestureListener {

@@ -73,21 +73,22 @@ public class MainActivity extends WearableActivity{
             public void onSwipeRight() {
 
                 finish();
-                //moveTaskToBack(true);
-                /*for(Timer timer: timers){
-                    if(timer.getTimerView().getPlayButton().getTag().equals("pause")){
-                        timersRunning = true;
-                    }
-                }
-                if(timersRunning){
-                    moveTaskToBack(true);
-                    timersRunning = false;
-                }
-                else{
-                    timersRunning = false;
-                    saveData();
-                    finish();
-                }*/
+            }
+        });
+
+        View mainScroll = findViewById(R.id.mainscroll);
+        mainScroll.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+
+            @Override
+            public void onSwipeLeft() {
+
+                setTimerFragment();
+            }
+
+            @Override
+            public void onSwipeRight() {
+
+                finish();
             }
         });
     }
