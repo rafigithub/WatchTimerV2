@@ -60,7 +60,7 @@ public class TimerView extends LinearLayout{
 
             @Override
             public void onSwipeRight() {
-                mainActivity.moveTaskToBack(true);
+                mainActivity.finish();
             }
 
             public void onClick(View v){
@@ -96,7 +96,7 @@ public class TimerView extends LinearLayout{
 
             @Override
             public void onSwipeRight() {
-                mainActivity.moveTaskToBack(true);
+                mainActivity.finish();
             }
 
             public void onClick(View v){
@@ -116,7 +116,7 @@ public class TimerView extends LinearLayout{
 
             @Override
             public void onSwipeRight() {
-                mainActivity.moveTaskToBack(true);
+                mainActivity.finish();
             }
 
             public void onClick(View v){
@@ -132,6 +132,20 @@ public class TimerView extends LinearLayout{
                 else{
                     Toast.makeText(mainActivity, "element not in array", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        timeText.setOnTouchListener(new OnSwipeTouchListener(mainActivity, timeText){
+
+            @Override
+            public void onSwipeLeft(){
+
+                mainActivity.setTimerFragment();
+            }
+            @Override
+            public void onSwipeRight(){
+
+                mainActivity.finish();
             }
         });
     }
@@ -151,6 +165,11 @@ public class TimerView extends LinearLayout{
     public LinearLayout getTimerContainer(){
 
         return timerContainer;
+    }
+
+    public String getStartingTime(){
+
+        return timer.getStartingTime();
     }
 }
 

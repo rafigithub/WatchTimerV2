@@ -54,7 +54,6 @@ public class MainActivity extends WearableActivity{
     private PowerManager powerManager;
     private PowerManager.WakeLock wakeLock;
     private ArrayList<TimerView> timers = new ArrayList<>();
-    //boolean timersRunning = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,7 @@ public class MainActivity extends WearableActivity{
         powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "awake");
 
-       /* SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 
         if(sharedPref.contains("times")){
 
@@ -73,16 +72,22 @@ public class MainActivity extends WearableActivity{
             String json = sharedPref.getString("times", null);
             Type type = new TypeToken<ArrayList<String>>() {
             }.getType();
-            ArrayList<String> timeWhenLeaving = new ArrayList<>();
-            timeWhenLeaving = gson.fromJson(json, type);
-            for(String times:timeWhenLeaving){
+            ArrayList<String> timeWhenLeaving = gson.fromJson(json, type) ;
 
-                TimerView timerView = new TimerView(this,times, (LinearLayout)findViewById(R.id.contenedor));
-                Timer timer = new Timer(timerView, this);
-                timers.add(timer);
+            if(timeWhenLeaving!=null){
+
+                for(String times:timeWhenLeaving){
+
+                    Timer timer = new Countdown(this, times);
+                    TimerView timerView = new TimerView(this, timer, (LinearLayout)findViewById(R.id.contenedor));
+                    timers.add(timerView);
+                }
             }
-            //Toast.makeText(this,json,Toast.LENGTH_SHORT).show();
-        }*/
+            else{
+
+                Toast.makeText(this,"saved time array is null",Toast.LENGTH_SHORT).show();
+            }
+        }
 
         View main = findViewById(R.id.main);
         main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
@@ -121,7 +126,7 @@ public class MainActivity extends WearableActivity{
 
         super.onEnterAmbient(ambientDetails);
 
-        if(areTimersRunning()){
+        if(timersAreRunning()){
 
             wakeLock.acquire();
         }
@@ -181,7 +186,7 @@ public class MainActivity extends WearableActivity{
         return timers;
     }
 
-    private boolean areTimersRunning(){
+    private boolean timersAreRunning(){
 
         boolean isRunning=false;
 
@@ -198,8 +203,17 @@ public class MainActivity extends WearableActivity{
         return isRunning;
     }
 
+    @Override
+    public void onDestroy(){
 
-   /* public void saveData(){
+        super.onDestroy();
+        if (wakeLock.isHeld()){
+            wakeLock.release();
+        }
+        saveData();
+    }
+
+    public void saveData(){
 
         ArrayList<String> timeWhenLeaving = new ArrayList<>();
 
@@ -209,14 +223,13 @@ public class MainActivity extends WearableActivity{
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<String>>(){}.getType();
 
-        for(Timer timer: timers){
+        for(TimerView timerView: timers){
 
-            timeWhenLeaving.add(timer.getTimerView().getTime().getText().toString());
+            timeWhenLeaving.add(timerView.getStartingTime());
         }
         String json = gson.toJson(timeWhenLeaving, type);
-        //String json = "Probando la guardada";
         editor.putString("times", json);
         editor.apply();
-    }*/
+    }
 }
 
