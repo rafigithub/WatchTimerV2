@@ -72,14 +72,14 @@ public class TimerView extends LinearLayout{
 
                         timer.setUpTimer(timeText);
                         timer.startTimer();
-                        play.setImageResource(R.drawable.ic_media_pause);
+                        play.setImageResource(R.drawable.ic_pause_white_48dp);
                         play.setTag("pause");
                     }
 
                     else if(play.getTag().equals("pause")){
 
                         timer.cancelTimer();
-                        play.setImageResource(R.drawable.ic_media_play);
+                        play.setImageResource(R.drawable.ic_play_arrow_white_48dp);
                         play.setTag("play");
                     }
                 }
@@ -157,7 +157,7 @@ public class TimerView extends LinearLayout{
     public void resetTimerView() {
 
         timeText.setText(timer.getStartingTime());
-        playButton.setImageResource(R.drawable.ic_media_play);
+        playButton.setImageResource(R.drawable.ic_play_arrow_white_48dp);
         playButton.setTag("play");
     }
 

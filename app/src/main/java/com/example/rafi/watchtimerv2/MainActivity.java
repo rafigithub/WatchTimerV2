@@ -29,7 +29,7 @@ public class MainActivity extends WearableActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_tutorial);
         setAmbientEnabled();
 
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -45,8 +45,9 @@ public class MainActivity extends WearableActivity{
             }.getType();
             ArrayList<String> timeWhenLeaving = gson.fromJson(json, type) ;
 
-            if(timeWhenLeaving!=null){
+            if(timeWhenLeaving!=null && timeWhenLeaving.size()>0){
 
+                setContentView(R.layout.activity_main);
                 for(String times:timeWhenLeaving){
 
                     Timer timer = new Countdown(this, times);
@@ -56,41 +57,62 @@ public class MainActivity extends WearableActivity{
             }
             else{
 
-                Toast.makeText(this,"saved time array is null",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"saved time array is empty",Toast.LENGTH_SHORT).show();
             }
         }
 
-        View main = findViewById(R.id.main);
-        main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+        if(findViewById(android.R.id.content) == findViewById(R.id.main)){
+            View main = findViewById(R.id.main);
+            main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
 
-            @Override
-            public void onSwipeLeft() {
+                @Override
+                public void onSwipeLeft() {
 
-                setTimerFragment();
-            }
+                    setTimerFragment();
+                }
 
-            @Override
-            public void onSwipeRight() {
+                @Override
+                public void onSwipeRight() {
 
-                finish();
-            }
-        });
+                    finish();
+                }
+            });
 
-        View mainScroll = findViewById(R.id.mainscroll);
-        mainScroll.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+            View mainScroll = findViewById(R.id.mainscroll);
+            mainScroll.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
 
-            @Override
-            public void onSwipeLeft() {
+                @Override
+                public void onSwipeLeft() {
 
-                setTimerFragment();
-            }
+                    setTimerFragment();
+                }
 
-            @Override
-            public void onSwipeRight() {
+                @Override
+                public void onSwipeRight() {
 
-                finish();
-            }
-        });
+                    finish();
+                }
+            });
+        }
+        else{
+            View main = findViewById(R.id.main);
+            main.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this){
+
+                @Override
+                public void onSwipeLeft() {
+
+                    setContentView(R.layout.activity_main);
+                    setTimerFragment();
+                }
+
+                @Override
+                public void onSwipeRight() {
+
+                    finish();
+                }
+            });
+        }
+
     }
 
     @Override
