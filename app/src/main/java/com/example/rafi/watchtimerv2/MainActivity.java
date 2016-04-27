@@ -141,6 +141,9 @@ public class MainActivity extends WearableActivity{
                 border.setBackgroundColor(Color.WHITE);
                 for (int i=0;i<border.getChildCount();i++){
                     border.getChildAt(i).setBackgroundColor(Color.BLACK);
+                    if(border.getChildAt(i) instanceof TextView){
+                        ((TextView) border.getChildAt(i)).getPaint().setAntiAlias(false);
+                    }
                 }
             }
         }
@@ -167,6 +170,9 @@ public class MainActivity extends WearableActivity{
                 border.setBackgroundColor(Color.BLACK);
                 for (int i=0;i<border.getChildCount();i++){
                     border.getChildAt(i).setBackgroundColor(Color.parseColor("#303F9F"));
+                    if(border.getChildAt(i) instanceof TextView){
+                        ((TextView) border.getChildAt(i)).getPaint().setAntiAlias(true);
+                    }
                 }
             }
         }
