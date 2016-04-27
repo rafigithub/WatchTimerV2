@@ -97,7 +97,7 @@ public class MainActivity extends WearableActivity{
 
         super.onEnterAmbient(ambientDetails);
 
-        if(timersAreRunning()){
+        if(timersAreRunning()!=null){
 
             wakeLock.acquire();
         }
@@ -163,9 +163,9 @@ public class MainActivity extends WearableActivity{
         return timers;
     }
 
-    private boolean timersAreRunning(){
+    private ArrayList<TimerView> timersAreRunning(){
 
-        boolean isRunning=false;
+        ArrayList<TimerView> runningTimers = new ArrayList<>();
 
         if (timers.size()>0){
 
@@ -173,11 +173,17 @@ public class MainActivity extends WearableActivity{
 
                 ImageButton playButton = (ImageButton)timerView.getTimerContainer().findViewById(R.id.playButton);
                 if(playButton.getTag().equals("pause")){
-                    isRunning = true;
+                    runningTimers.add(timerView);
                 }
             }
         }
-        return isRunning;
+
+        if(runningTimers.size()>0){
+            return runningTimers;
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
@@ -188,6 +194,13 @@ public class MainActivity extends WearableActivity{
             wakeLock.release();
         }
         saveData();
+        ArrayList<TimerView> runningTimers=timersAreRunning();
+        if(runningTimers!=null){
+            for(TimerView timerView: runningTimers){
+
+                timerView.cancelTimer();
+            }
+        }
     }
 
     public void saveData(){

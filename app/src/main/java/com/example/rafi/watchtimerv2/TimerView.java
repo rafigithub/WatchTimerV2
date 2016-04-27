@@ -170,5 +170,11 @@ public class TimerView extends LinearLayout{
 
         return timer.getStartingTime();
     }
+
+    public void cancelTimer(){
+
+        timer.cancelTimer();
+    }
+
 }
 
