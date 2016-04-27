@@ -1,16 +1,9 @@
 package com.example.rafi.watchtimerv2;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Rafi on 26/04/2016.
@@ -40,9 +33,8 @@ public class Countdown implements Timer {
             @Override
             public void onTick(long millisUntilFinished) {
 
-                TextView time = timerDisplay;
                 String timeRemaining = MilliConversions.milliToString(millisUntilFinished);
-                time.setText(timeRemaining);
+                timerDisplay.setText(timeRemaining);
             }
 
             @Override
