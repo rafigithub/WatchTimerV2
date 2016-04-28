@@ -130,6 +130,8 @@ public class MainActivity extends WearableActivity{
 
         RelativeLayout main = (RelativeLayout)findViewById(R.id.main);
         main.setBackgroundColor(Color.BLACK);
+        RelativeLayout tutorial = (RelativeLayout)findViewById(R.id.tutorial);
+        tutorial.setBackgroundColor(Color.BLACK);
         if(timers.size()!=0){
 
             for(TimerView timerView: timers){
@@ -158,6 +160,8 @@ public class MainActivity extends WearableActivity{
 
         RelativeLayout main = (RelativeLayout) findViewById(R.id.main);
         main.setBackgroundColor(Color.parseColor("#303F9F"));
+        RelativeLayout tutorial = (RelativeLayout)findViewById(R.id.tutorial);
+        tutorial.setBackgroundColor(Color.parseColor("#303F9F"));
 
         if(timers.size()!=0){
 

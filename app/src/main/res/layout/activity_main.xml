@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tutorial"
-            android:textSize="18dp"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:fontFamily="serif"
             android:textColor="#FFFFFF"
@@ -45,12 +45,6 @@
             android:layout_centerVertical="true"
             android:layout_centerInParent="true">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/swipeLeft"
-                android:src="@drawable/ic_swipe_left_48dp"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -59,6 +53,12 @@
                 android:id="@+id/textSwipeLeft"
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/swipeLeft"
+                android:src="@drawable/ic_swipe_left_48dp"/>
         </LinearLayout>
 
 
