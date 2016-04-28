@@ -9,6 +9,60 @@
     android:layout_height="match_parent"
     android:background="#303F9F">
 
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.example.rafi.watchtimerv2.MainActivity"
+        android:id="@+id/tutorial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/swipeleft"
+            android:src="@drawable/ic_swipe_left_48dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crear Timer o Avanzar"
+            android:textAlignment="center"
+            android:id="@+id/textswipeleft"
+            android:layout_alignTop="@+id/swipeleft"
+            android:layout_alignParentEnd="true"
+            android:maxWidth="95dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/swiperight"
+            android:src="@drawable/ic_trending_flat_white_48dp"
+            android:layout_below="@+id/textswipeleft"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salir o Retroceder"
+            android:textAlignment="center"
+            android:id="@+id/textswiperight"
+            android:layout_alignTop="@+id/swiperight"
+            android:layout_below="@+id/swipeleft"
+            android:maxWidth="95dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp"/>
+    </RelativeLayout>
+
     <TextClock
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -42,11 +42,6 @@ public class Countdown implements Timer {
 
                 Vibrator v = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(300);
-                /*Intent intentHome = new Intent(mainActivity, MainActivity.class);
-                intentHome.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intentHome.putExtra("Default extra","");
-                mainActivity.startActivity(intentHome);*/
             }
         };
     }

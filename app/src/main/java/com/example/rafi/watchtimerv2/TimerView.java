@@ -126,6 +126,9 @@ public class TimerView extends LinearLayout{
                 if(posInArray!=-1){
                     //Toast.makeText(mainActivity, "element no"+ posInArray+".", Toast.LENGTH_SHORT).show();
                     mainActivity.getTimerArray().remove(posInArray);
+                    if(mainActivity.getTimerArray().size()==0){
+                        mainActivity.findViewById(R.id.tutorial).setVisibility(View.VISIBLE);
+                    }
 
                 }
                 else{
