@@ -9,65 +9,85 @@
     android:layout_height="match_parent"
     android:background="#303F9F">
 
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textClock"
+        android:layout_centerHorizontal="true" />
+
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context="com.example.rafi.watchtimerv2.MainActivity"
         android:id="@+id/tutorial"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/swipeleft"
-            android:src="@drawable/ic_swipe_left_48dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"/>
+        android:layout_height="match_parent"
+        android:background="#303F9F">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crear Timer o Avanzar"
+            android:text="@string/tutorial"
+            android:textSize="18dp"
             android:textAlignment="center"
-            android:id="@+id/textswipeleft"
-            android:layout_alignTop="@+id/swipeleft"
-            android:layout_alignParentEnd="true"
-            android:maxWidth="95dp"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="5dp"/>
+            android:fontFamily="serif"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"/>
 
-        <ImageView
+        <LinearLayout
+            android:id="@+id/containerSwipeLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/swiperight"
-            android:src="@drawable/ic_trending_flat_white_48dp"
-            android:layout_below="@+id/textswipeleft"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp" />
+            android:orientation="horizontal"
+            android:layout_below="@+id/welcome"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true">
 
-        <TextView
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/swipeLeft"
+                android:src="@drawable/ic_swipe_left_48dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Swipe to the \n Left to \n add Timer"
+                android:textAlignment="center"
+                android:id="@+id/textSwipeLeft"
+                android:textSize="18sp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/containerSwiperRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Salir o Retroceder"
-            android:textAlignment="center"
-            android:id="@+id/textswiperight"
-            android:layout_alignTop="@+id/swiperight"
-            android:layout_below="@+id/swipeleft"
-            android:maxWidth="95dp"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="5dp"/>
+            android:orientation="horizontal"
+            android:layout_centerVertical="false"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/containerSwipeLeft">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/swipeRight"
+                android:src="@drawable/ic_trending_flat_white_48dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Swipe to the\n Right to Exit"
+                android:textAlignment="center"
+                android:gravity="center_vertical"
+                android:id="@+id/textSwipeRight"
+                android:textSize="18sp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
     </RelativeLayout>
-
-    <TextClock
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textClock"
-        android:layout_centerHorizontal="true" />
 
     <ScrollView
         android:id="@+id/mainscroll"
