@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Simple Timer V2</string>
-    <string name="action_settings">Settings</string>
-    <string name="signin">Accept</string>
-    <string name="cancel">Cancel</string>
+    <string name="action_settings">Configuración</string>
+    <string name="signin">Aceptar</string>
+    <string name="cancel">Cancelar</string>
     <string name="timeOverTen">%1$d:%2$d</string>
     <string name="timeUnderTen">%1$d:0%2$d</string>
     <string name="minutos">Minutos</string>
@@ -11,8 +11,8 @@
     <string name="prueba">Prueba</string>
     <string name="test">Test</string>
     <string name="tutorial">Simple Wear Timer</string>
-    <string name="leftSwipe">Swipe to the \n Left to \n add Timer</string>
-    <string name="rightSwipe">Swipe to the\n Right to Exit</string>
+    <string name="leftSwipe">Deslizar a la\n Izquierda para\n agregar Timer</string>
+    <string name="rightSwipe">Deslizar a la\n Derecha para Salir</string>
 </resources>
 
     <!--
