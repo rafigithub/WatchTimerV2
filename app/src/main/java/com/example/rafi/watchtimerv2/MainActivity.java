@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.wearable.activity.WearableActivity;
+import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -31,6 +32,17 @@ public class MainActivity extends WearableActivity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+        stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener(){
+
+            @Override
+            public void onLayoutInflated(WatchViewStub stub){
+                RelativeLayout rootView = (RelativeLayout) stub.findViewById(R.id.main);
+
+            }
+        });
+
         setAmbientEnabled();
 
         RelativeLayout tutorial = (RelativeLayout) findViewById(R.id.tutorial);
