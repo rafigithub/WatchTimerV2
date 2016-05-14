@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends WearableActivity{
 
+    //private View rootView;
     private PowerManager.WakeLock wakeLock;
     private ArrayList<TimerView> timers = new ArrayList<>();
 
@@ -33,16 +34,17 @@ public class MainActivity extends WearableActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+        /*WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener(){
 
             @Override
             public void onLayoutInflated(WatchViewStub stub){
-                RelativeLayout rootView = (RelativeLayout) stub.findViewById(R.id.main);
 
+                rootView = stub.findViewById(R.id.main);
             }
         });
-
+        if(rootView!=null)
+            setContentView(rootView);*/
         setAmbientEnabled();
 
         RelativeLayout tutorial = (RelativeLayout) findViewById(R.id.tutorial);
